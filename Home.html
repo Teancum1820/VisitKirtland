@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visit Kirtland, Ohio | Historic Sites, Nature & Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap');
+
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero-pattern {
+            background-color: #1a202c;
+            background-image: url("https://i.imgur.com/NCXUYPU.jpeg");
+            background-size: cover;
+            background-position: center; 
+            position: relative;
+        }
+        
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.5); 
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 scroll-smooth">
+
+    <!-- Hero Section -->
+    <header class="hero-pattern h-screen flex items-center justify-center text-center px-4">
+        <div class="hero-overlay"></div>
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <h2 class="text-green-400 font-bold tracking-widest uppercase text-sm mb-4">Discover Kirtland</h2>
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">The City of Faith & Beauty</h1>
+            <p class="text-xl md:text-2xl text-stone-200 mb-10 max-w-2xl mx-auto font-light">
+                Experience historic gems, breathtaking nature trails, and a vibrant community just 22 miles east of Cleveland.
+            </p>
+        </div>
+    </header>
+
+    <!-- About / Intro Section -->
+    <section id="about" class="py-16 bg-white border-b border-stone-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+            <h2 class="text-3xl font-bold text-stone-900 mb-6">Discover Kirtland: The City of Faith and Beauty</h2>
+            <p class="text-lg text-stone-600 leading-relaxed mb-6">
+                Visit Kirtland is your guide to experiencing the best of Kirtland, Ohio. Operated by the Kirtland Heritage Group, a 501(c)(3) nonprofit, this site helps visitors plan meaningful and memorable visits by highlighting local attractions, including historic church history sites, scenic parks, family-friendly activities, and community events.
+            </p>
+            <p class="text-lg text-stone-600 leading-relaxed">
+                We also celebrate Kirtland’s local shops, restaurants, and businesses—encouraging visitors and residents alike to explore, dine, and shop local while enjoying all that our community has to offer.
+            </p>
+        </div>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section id="events" class="py-20 bg-stone-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-stone-900 mb-4">Upcoming Events</h2>
+                <div class="w-24 h-1 bg-green-600 mx-auto"></div>
+            </div>
+
+            <!-- Featured Large Card: Lamb of God -->
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row mb-12">
+                <div class="md:w-1/2 relative min-h-[300px]">
+                    <img src="https://i.imgur.com/LerMXql.png" alt="Concert Event" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-indigo-900 bg-opacity-30"></div>
+                </div>
+                <div class="md:w-1/2 p-10 md:p-14 flex flex-col justify-center">
+                    <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold mb-4 w-max">Featured Event</span>
+                    <h3 class="text-3xl font-bold text-stone-900 mb-4">Lamb of God Production</h3>
+                    <p class="text-stone-600 mb-6 leading-relaxed">
+                        Experience the passion of Christ through powerful music and storytelling. A moving production filmed and presented locally. Don't miss this spiritual and artistic highlight of the season.
+                    </p>
+                    <div class="flex items-center gap-6 mb-8 text-stone-700">
+                        <div class="flex items-center gap-2">
+                            <i class="far fa-calendar-alt text-green-600"></i>
+                            <span>April 2025</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-ticket-alt text-green-600"></i>
+                            <span>Tickets Available Soon</span>
+                        </div>
+                    </div>
+                    <a href="https://www.kirtlandheritagegroup.com/events" class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition w-max inline-block font-semibold">Learn More</a>
+                </div>
+            </div>
+
+            <!-- 2026 Family Reunions & Heritage Days Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Heritage Days -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-shadow duration-300">
+                    <div class="h-48 bg-stone-200 overflow-hidden">
+                        <img src="https://i.imgur.com/oTUqbbm.png" alt="Kirtland Heritage Days" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8 flex-grow flex flex-col">
+                        <h3 class="text-2xl font-bold text-stone-900 mb-3">Kirtland Heritage Days</h3>
+                        <p class="text-stone-600 mb-6 text-sm leading-relaxed flex-grow">
+                            Join us for our annual celebration of history, community, and heritage. A weekend filled with tours, local vendors, and family activities.
+                        </p>
+                        <div class="flex flex-col gap-4">
+                            <a href="https://www.visitkirtland.com/kirtland-heritage-days/2026-kirtland-heritage-days" class="text-green-700 font-bold hover:text-green-900 inline-flex items-center gap-2">
+                                Event Details <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                            <a href="https://runsignup.com/Race/OH/Kirtland/KirtlandHeritageRun" target="_blank" class="bg-green-600 text-white px-5 py-2 rounded text-sm font-semibold hover:bg-green-700 transition inline-block text-center shadow-sm">
+                                Register for Race
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Millett Family Reunion -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col border-t-4 border-green-600 hover:shadow-2xl transition-shadow duration-300">
+                    <div class="p-8 flex-grow">
+                        <div class="text-green-600 font-bold text-xs uppercase tracking-widest mb-2">2026 Family Reunion</div>
+                        <h3 class="text-2xl font-bold text-stone-900 mb-4">Artemus Millett/Millet Family</h3>
+                        <p class="text-stone-600 mb-6 text-sm leading-relaxed">
+                            We are thrilled to welcome descendants of the Artemus Millett family for a special family-focused gathering in the heart of historic Kirtland.
+                        </p>
+                        <a href="https://www.visitkirtland.com/family-reunion/millet-reunion" class="bg-stone-900 text-white px-5 py-2 rounded text-sm font-semibold hover:bg-stone-700 transition inline-block">Millet Family Page</a>
+                    </div>
+                </div>
+
+                <!-- Harris Family Organization -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col border-t-4 border-green-600 hover:shadow-2xl transition-shadow duration-300">
+                    <div class="p-8 flex-grow">
+                        <div class="text-green-600 font-bold text-xs uppercase tracking-widest mb-2">2026 Family Reunion</div>
+                        <h3 class="text-2xl font-bold text-stone-900 mb-4">Harris Family Organization</h3>
+                        <p class="text-stone-600 mb-6 text-sm leading-relaxed">
+                            A historic gathering for the descendants of Martin and Emer Harris. Connect with cousins and explore the legacy of these early pioneers.
+                        </p>
+                        <a href="https://www.visitkirtland.com/family-reunion/harris-reunion" class="bg-stone-900 text-white px-5 py-2 rounded text-sm font-semibold hover:bg-stone-700 transition inline-block">Harris Family Organization Page</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <h2 class="text-4xl font-bold text-stone-900 mb-6">A Historic Gem</h2>
+                    <p class="text-lg text-stone-600 mb-6 leading-relaxed">
+                        Kirtland holds a special place in American history as the headquarters of The Church of Jesus Christ of Latter-day Saints from 1831 to 1838. During this time, early settlers built the magnificent <strong>Kirtland Temple</strong>, the first temple of the Latter-day Saint movement.
+                    </p>
+                    <p class="text-lg text-stone-600 mb-8 leading-relaxed">
+                        This stunning landmark still stands today, drawing over 50,000 visitors annually. Alongside the temple, many original and reconstructed historic buildings offer a glimpse into Kirtland’s past, making it a must-visit for history enthusiasts.
+                    </p>
+                </div>
+                <div class="md:w-1/2 grid grid-cols-2 gap-4">
+                    <img src="https://assets.ldscdn.org/08/b3/08b32b5693129807a3f021f349e6026d223eb5fb/kirtland_ohio_temple.jpeg" alt="Kirtland Temple" class="rounded-lg shadow-lg w-full h-64 object-cover col-span-2">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banner Ad -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <a href="https://www.restorationtourgroup.com" target="_blank" class="block transition-transform hover:scale-[1.01] duration-300">
+                <img src="https://i.imgur.com/dikcBBf.png" alt="Restoration Tour Group" class="w-full rounded-xl shadow-lg">
+            </a>
+        </div>
+    </section>
+
+    <!-- Nature & Outdoors -->
+    <section id="nature" class="py-20 bg-stone-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-stone-900 mb-4">Outdoor Adventures & Scenic Beauty</h2>
+                <p class="text-xl text-stone-600 max-w-2xl mx-auto">Explore over 3,600 acres of natural wonder.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1: Penitentiary Glen -->
+                <div class="bg-white rounded-xl shadow-lg border border-stone-100 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col">
+                    <div class="h-48 bg-stone-200 relative flex-shrink-0">
+                        <img src="https://i.imgur.com/akwOvWu.png" alt="Penitentiary Glen" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold text-stone-900 mb-2">Penitentiary Glen Reservation</h3>
+                        <p class="text-stone-600 mb-4 text-sm">A 424-acre park managed by Lake Metroparks. This stunning natural oasis features:</p>
+                        <ul class="text-sm text-stone-600 space-y-2 mb-4 list-disc pl-4">
+                            <li>Over 8.5 miles of hiking trails through forests, fields, and wetlands.</li>
+                            <li>Nature Center with interactive exhibits.</li>
+                            <li>Scenic picnic areas.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 2: Holden Arboretum -->
+                <div class="bg-white rounded-xl shadow-lg border border-stone-100 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col">
+                    <div class="h-48 bg-stone-200 relative flex-shrink-0">
+                        <img src="https://i.imgur.com/ceynod5.png" alt="Holden Arboretum" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold text-stone-900 mb-2">Holden Arboretum</h3>
+                        <p class="text-stone-600 mb-4 text-sm">One of the largest arboretums in the U.S. (3,600 acres). Visitors can enjoy:</p>
+                        <ul class="text-sm text-stone-600 space-y-2 mb-4 list-disc pl-4">
+                            <li><strong>Murch Canopy Walk & Kalberer Emergent Tower</strong> (120ft high).</li>
+                            <li>Display Gardens & Butterfly Garden.</li>
+                            <li>Over 20 miles of hiking trails.</li>
+                            <li>Educational Programs & Events.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 3: Sports -->
+                <div class="bg-white rounded-xl shadow-lg border border-stone-100 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col">
+                    <div class="h-48 bg-stone-200 relative flex-shrink-0">
+                        <img src="https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/C5M7IXLDRVAG7I2T55IAV2M2UQ.JPG" alt="Sports" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold text-stone-900 mb-2">A Passion for Sports</h3>
+                        <p class="text-stone-600 mb-4 text-sm">
+                            Kirtland is known for exceptional athletics. The <strong>Kirtland Hornets</strong> football team, led by Coach Tiger LaVerde, has built a powerhouse legacy.
+                        </p>
+                        <ul class="text-sm text-stone-600 space-y-2 mb-4 list-disc pl-4">
+                            <li><strong>State Champions:</strong> 2011, 2013, 2015, 2018, 2019, 2020, 2023.</li>
+                            <li><strong>Women's Soccer:</strong> State Champions in 2020.</li>
+                            <li>Strong community pride and sportsmanship.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What Can I Do In Kirtland? Section -->
+    <section id="what-to-do" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-12 items-start">
+                
+                <!-- Left Column: Content -->
+                <div class="lg:w-1/2">
+                    <div class="mb-10 text-left">
+                        <h2 class="text-4xl font-bold text-stone-900 mb-4">What Can I Do In Kirtland?</h2>
+                        <div class="w-24 h-1 bg-green-600"></div>
+                    </div>
+            
+                    <div class="space-y-4">
+                        <!-- Dropdown 1: Church History Locations -->
+                        <details class="group bg-stone-50 rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                            <summary class="flex items-center justify-between p-6 cursor-pointer list-none select-none hover:bg-stone-100 transition">
+                                <h3 class="text-xl font-bold text-stone-900">Church History Locations</h3>
+                                <span class="transform transition-transform duration-300 group-open:rotate-180">
+                                    <i class="fas fa-chevron-down text-green-600"></i>
+                                </span>
+                            </summary>
+                            <div class="px-6 pb-6 text-stone-600 border-t border-stone-200 pt-6 bg-white">
+                                <p class="mb-6 italic">Kirtland, Ohio, is rich with significant sites from early Church history. Here are some key locations:</p>
+                                
+                                <div class="space-y-6">
+                                    <div>
+                                        <h4 class="font-bold text-stone-900 text-lg mb-1">Kirtland Temple</h4>
+                                        <p class="text-stone-600 leading-relaxed">Built in the late 1830s, this temple was a sacred space for worship, learning, and community for early Latter-day Saints. It was dedicated on March 27, 1836, and has been meticulously preserved.</p>
+                                    </div>
+                                    
+                                    <div>
+                                        <h4 class="font-bold text-stone-900 text-lg mb-1">Joseph and Emma Smith Home</h4>
+                                        <p class="text-stone-600 leading-relaxed">This home was the residence of Joseph and Emma Smith for over four years. It was here that several revelations now included in the Doctrine and Covenants were received, and the translation of the Book of Abraham took place.</p>
+                                    </div>
+
+                                    <div>
+                                        <h4 class="font-bold text-stone-900 text-lg mb-1">Newel K. Whitney Store</h4>
+                                        <p class="text-stone-600 leading-relaxed">This store served as a gathering place for early Church members and was the site of many important events, including the organization of the School of the Prophets.</p>
+                                    </div>
+
+                                    <div>
+                                        <h4 class="font-bold text-stone-900 text-lg mb-1">Historic Kirtland Village</h4>
+                                        <p class="text-stone-600 leading-relaxed">This area includes several restored buildings such as the Newel and Ann Whitney Home, the Johnson Inn, a schoolhouse, sawmill, and ashery. It provides a glimpse into the daily lives of early Church members.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+            
+                        <!-- Dropdown 2: Local Attractions -->
+                        <details class="group bg-stone-50 rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                            <summary class="flex items-center justify-between p-6 cursor-pointer list-none select-none hover:bg-stone-100 transition">
+                                <h3 class="text-xl font-bold text-stone-900">Local Attractions</h3>
+                                <span class="transform transition-transform duration-300 group-open:rotate-180">
+                                    <i class="fas fa-chevron-down text-green-600"></i>
+                                </span>
+                            </summary>
+                            <div class="px-6 pb-6 text-stone-600 border-t border-stone-200 pt-6 bg-white">
+                                <p class="mb-6 italic">Kirtland, Ohio, offers a variety of attractions beyond its rich church history. Here are some highlights:</p>
+                                
+                                <div class="space-y-6">
+                                    <div>
+                                        <h4 class="font-bold text-stone-900 text-lg mb-1">Holden Arboretum</h4>
+                                        <p class="text-stone-600 leading-relaxed">This expansive arboretum features over 3,500 acres of gardens, trails, and natural areas. It's perfect for hiking, bird-watching, and enjoying the beauty of native plants.</p>
+                                    </div>
+
+                                    <div>
+                                        <h4 class="font-bold text-stone-900 text-lg mb-1">Lake Metroparks Farmpark</h4>
+                                        <p class="text-stone-600 leading-relaxed">A family-oriented science and cultural center devoted to agriculture and farming. Visitors can experience hands-on activities like milking cows and learn about country life.</p>
+                                    </div>
+
+                                    <div>
+                                        <h4 class="font-bold text-stone-900 text-lg mb-1">Penitentiary Glen Reservation</h4>
+                                        <p class="text-stone-600 leading-relaxed">This nature reserve includes a wildlife center, hiking trails, and beautiful scenic views. It's a great spot for nature lovers and outdoor enthusiasts.</p>
+                                    </div>
+
+                                    <div>
+                                        <h4 class="font-bold text-stone-900 text-lg mb-1">Chapin Forest Reservation</h4>
+                                        <p class="text-stone-600 leading-relaxed">Known for its extensive trail system, this park offers opportunities for hiking, picnicking, and enjoying the outdoors.</p>
+                                    </div>
+
+                                    <div>
+                                        <h4 class="font-bold text-stone-900 text-lg mb-1">Canopy Walk & Emergent Tower</h4>
+                                        <p class="text-stone-600 leading-relaxed">Located within the Holden Arboretum, this attraction provides a unique perspective of the forest from above the treetops, offering stunning views and a bit of adventure.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Right Column: Map -->
+                <div class="lg:w-1/2 w-full h-[500px] lg:h-auto lg:min-h-[600px] bg-stone-100 rounded-2xl overflow-hidden shadow-lg border border-stone-200 relative">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47661.02640248439!2d-81.38531604085427!3d41.604245604163914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8831a3178c74033b%3A0x629738096538350!2sKirtland%2C%20OH!5e0!3m2!1sen!2sus!4v1702871234567!5m2!1sen!2sus" width="100%" height="100%" style="border:0; position: absolute; inset: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-white text-stone-900 text-center border-t border-stone-100">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="flex flex-col items-center gap-6">
+                <img src="https://i.imgur.com/Cy0qkfq.png" alt="Kirtland Heritage Group" class="h-32 w-auto object-contain">
+                <p class="text-stone-500 text-sm max-w-lg leading-relaxed">
+                    VisitKirtland.com is owned and operated by The Kirtland Heritage Group a 501(c)(3) organization. To learn more, and donate visit us at <a href="https://www.kirtlandheritagegroup.com" class="text-green-700 hover:text-green-800 hover:underline">The Kirtland Heritage Group</a>.
+                </p>
+                
+                <!-- Social Media Links -->
+                <div class="flex items-center gap-6 mt-2">
+                    <a href="https://www.facebook.com/profile.php?id=61572379542323" target="_blank" rel="noopener noreferrer" class="text-stone-400 hover:text-blue-600 transition-all transform hover:scale-110 duration-300" aria-label="Visit us on Facebook">
+                        <i class="fab fa-facebook text-3xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/visitkirtland/" target="_blank" rel="noopener noreferrer" class="text-stone-400 hover:text-pink-600 transition-all transform hover:scale-110 duration-300" aria-label="Visit us on Instagram">
+                        <i class="fab fa-instagram text-3xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sponsors Section -->
+    <section id="sponsors" class="py-20 bg-stone-900 text-stone-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Special Thanks to Our Sponsors!</h2>
+                <div class="w-32 h-1 bg-green-600 mx-auto mb-6"></div>
+                <p class="text-xl text-stone-400 max-w-3xl mx-auto leading-relaxed">
+                    We extend our deepest gratitude to the local businesses and organizations that help make our community vibrant and support our mission.
+                </p>
+            </div>
+
+            <!-- Image Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Sponsors 1-16 -->
+                <div class="bg-stone-800 p-2 rounded-xl border border-stone-700 hover:scale-[1.02] transition duration-300"><div class="bg-stone-700 rounded-lg h-48 w-full flex items-center justify-center p-4 overflow-hidden"><img src="https://i.imgur.com/TDnCZEW.png" alt="Sponsor" class="max-h-full max-w-full object-contain"></div></div>
+                <div class="bg-stone-800 p-2 rounded-xl border border-stone-700 hover:scale-[1.02] transition duration-300"><div class="bg-stone-700 rounded-lg h-48 w-full flex items-center justify-center p-4 overflow-hidden"><img src="https://i.imgur.com/hoeRpMQ.png" alt="Sponsor" class="max-h-full max-w-full object-contain"></div></div>
+                <div class="bg-stone-800 p-2 rounded-xl border border-stone-700 hover:scale-[1.02] transition duration-300"><div class="bg-stone-700 rounded-lg h-48 w-full flex items-center justify-center p-4 overflow-hidden"><img src="https://i.imgur.com/wJmFBRj.png" alt="Sponsor" class="max-h-full max-w-full object-contain"></div></div>
+                <div class="bg-stone-800 p-2 rounded-xl border border-stone-700 hover:scale-[1.02] transition duration-300"><div class="bg-stone-700 rounded-lg h-48 w-full flex items-center justify-center p-4 overflow-hidden"><img src="https://i.imgur.com/tFXZ629.png" alt="Sponsor" class="max-h-full max-w-full object-contain"></div></div>
+                <div class="bg-stone-800 p-2 rounded-xl border border-stone-700 hover:scale-[1.02] transition duration-300"><div class="bg-stone-700 rounded-lg h-48 w-full flex items-center justify-center p-4 overflow-hidden"><img src="https://i.imgur.com/IfBv2hE.png" alt="Sponsor" class="max-h-full max-w-full object-contain"></div></div>
+                <div class="bg-stone-800 p-2 rounded-xl border border-stone-700 hover:scale-[1.02] transition duration-300"><div class="bg-stone-700 rounded-lg h-48 w-full flex items-center justify-center p-4 overflow-hidden"><img src="https://i.imgur.com/ZIEM1Rg.png" alt="Sponsor" class="max-h-full max-w-full object-contain"></div></div>
+                <div class="bg-stone-800 p-2 rounded-xl border border-stone-700 hover:scale-[1.02] transition duration-300"><div class="bg-stone-700 rounded-lg h-48 w-full flex items-center justify-center p-4 overflow-hidden"><img src="https://i.imgur.com/96sNK4A.png" alt="Sponsor" class="max-h-full max-w-full object-contain"></div></div>
+                <div class="bg-stone-800 p-2 rounded-xl border border-stone-700 hover:scale-[1.02] transition duration-300"><div class="bg-stone-700 rounded-lg h-48 w-full flex items-center justify-center p-4 overflow-hidden"><img src="https://i.imgur.com/TH3GzzQ.png" alt="Sponsor" class="max-h-full max-w-full object-contain"></div></div>
+                <div class="bg-stone-800 p-2 rounded-xl border border-stone-700 hover:scale-[1.02] transition duration-300"><div class="bg-stone-700 rounded-lg h-48 w-full flex items-center justify-center p-4 overflow-hidden"><img src="https://i.imgur.com/Cm4z0dh.png" alt="Sponsor" class="max-h-full max-w-full object-contain"></div></div>
+                <div class="bg-stone-800 p-2 rounded-xl border border-stone-700 hover:scale-[1.02] transition duration-300"><div class="bg-stone-700 rounded-lg h-48 w-full flex items-center justify-center p-4 overflow-hidden"><img src="https://i.imgur.com/ACNNYNc.png" alt="Sponsor" class="max-h-full max-w-full object-contain"></div></div>
+                <div class="bg-stone-800 p-2 rounded-xl border border-stone-700 hover:scale-[1.02] transition duration-300"><div class="bg-stone-700 rounded-lg h-48 w-full flex items-center justify-center p-4 overflow-hidden"><img src="https://i.imgur.com/VtDJggU.png" alt="Sponsor" class="max-h-full max-w-full object-contain"></div></div>
+                <div class="bg-stone-800 p-2 rounded-xl border border-stone-700 hover:scale-[1.02] transition duration-300"><div class="bg-stone-700 rounded-lg h-48 w-full flex items-center justify-center p-4 overflow-hidden"><img src="https://i.imgur.com/w0VWmnM.png" alt="Sponsor" class="max-h-full max-w-full object-contain"></div></div>
+                <div class="bg-stone-800 p-2 rounded-xl border border-stone-700 hover:scale-[1.02] transition duration-300"><div class="bg-stone-700 rounded-lg h-48 w-full flex items-center justify-center p-4 overflow-hidden"><img src="https://i.imgur.com/q2h9TNt.png" alt="Sponsor" class="max-h-full max-w-full object-contain"></div></div>
+                <div class="bg-stone-800 p-2 rounded-xl border border-stone-700 hover:scale-[1.02] transition duration-300"><div class="bg-stone-700 rounded-lg h-48 w-full flex items-center justify-center p-4 overflow-hidden"><img src="https://i.imgur.com/5Q0tBBM.png" alt="Sponsor" class="max-h-full max-w-full object-contain"></div></div>
+                <div class="bg-stone-800 p-2 rounded-xl border border-stone-700 hover:scale-[1.02] transition duration-300"><div class="bg-stone-700 rounded-lg h-48 w-full flex items-center justify-center p-4 overflow-hidden"><img src="https://i.imgur.com/HKVuAa3.png" alt="Sponsor" class="max-h-full max-w-full object-contain"></div></div>
+                <div class="bg-stone-800 p-2 rounded-xl border border-stone-700 hover:scale-[1.02] transition duration-300"><div class="bg-stone-700 rounded-lg h-48 w-full flex items-center justify-center p-4 overflow-hidden"><img src="https://i.imgur.com/05tIX9f.png" alt="Sponsor" class="max-h-full max-w-full object-contain"></div></div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

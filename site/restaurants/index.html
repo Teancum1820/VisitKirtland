@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurants | Visit Kirtland</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap');
+
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        
+        /* Hero Pattern */
+        .dining-hero {
+            background-color: #1a202c;
+            /* Generic food/dining background image */
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop"); 
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/css/site.css?v=20260630.3">
+    <script defer src="../assets/js/site.js?v=20260630.3"></script>
+</head>
+<body class="bg-stone-50 text-stone-800 scroll-smooth site-migrated" data-nav-key="dining">
+<header class="site-header" data-site-header>
+  <a class="site-brand" href="../" aria-label="Visit Kirtland home">
+    <span class="site-brand-mark"><img src="../assets/mirrored-images/bb7183c808f854e5b990caf819375e0737d13525cefd346afe53bb0ee412efa7.png" alt=""></span>
+    <span class="site-brand-text"><strong>Visit Kirtland</strong><span>The City of Faith &amp; Beauty</span></span>
+  </a>
+  <button class="site-nav-toggle" type="button" aria-label="Open navigation" aria-controls="site-navigation" aria-expanded="false" data-site-nav-toggle>
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-site-nav>
+    <a href="../home/" data-nav-key="home">Home</a>
+    <div class="site-dropdown" data-site-dropdown>
+      <button class="site-dropdown-toggle" type="button" aria-expanded="false" data-nav-key="heritage" data-site-dropdown-toggle>Heritage Days <span class="site-caret"></span></button>
+      <div class="site-dropdown-menu">
+        <a href="../kirtland-heritage-days/2026-kirtland-heritage-days/" data-nav-key="heritage-2026">2026 Heritage Days</a>
+        <a href="../kirtland-heritage-days/2025-kirtland-heritage-days/" data-nav-key="heritage-2025">2025 Archive</a>
+        <a href="../kirtland-heritage-days/2024-kirtland-heritage-days/" data-nav-key="heritage-2024">2024 Archive</a>
+      </div>
+    </div>
+    <a href="../church-history-locations/" data-nav-key="history">Church History</a>
+    <a href="../local-houses-of-worship/" data-nav-key="worship">Worship</a>
+    <a href="../things-to-do-near-cleveland/" data-nav-key="things">Things To Do</a>
+    <a href="../lodging/" data-nav-key="lodging">Lodging</a>
+    <a href="./" data-nav-key="dining">Dining</a>
+  </nav>
+</header>
+
+    <!-- Header Section -->
+    <header class="dining-hero text-white pt-24 pb-16 px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Local Dining</h1>
+            <p class="text-xl text-stone-200 font-light max-w-2xl mx-auto">
+                Explore the flavors of Kirtland, from wood-fired pizza and premium ice cream to classic American barbecue and Italian favorites.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
+
+        <div class="grid md:grid-cols-2 gap-8">
+            
+            <!-- Biga Wood Fired Pizzeria -->
+            <div class="bg-white rounded-xl p-8 shadow-sm border border-stone-200 flex flex-col">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="../assets/mirrored-images/9c61fdfacad23ffbd2f5dafde569d919603098077716ef272a65b2c3d1d544da.png" alt="Biga Wood Fired Pizzeria Logo" class="w-16 h-16 object-contain">
+                    <h3 class="text-2xl font-bold text-stone-900">Biga Wood Fired Pizzeria</h3>
+                </div>
+                <p class="text-stone-600 mb-6 leading-relaxed flex-grow">
+                    Biga Wood Fired Pizzeria offers an authentic Naples-style pizza experience right in Kirtland, Ohio. Using traditional methods and the finest, freshest local ingredients, Biga creates delicious pizzas cooked in a wood-fired oven at over 900&deg;F. Their menu features a variety of mouth-watering options, from classic Margherita to unique creations like BBQ Beef Brisket Pizza. In addition to their signature pizzas, Biga also offers a selection of starters, salads, and desserts.
+                </p>
+                <a href="https://bigawoodfiredpizza.com/" target="_blank" class="text-indigo-600 font-bold hover:text-indigo-800 hover:underline inline-flex items-center gap-2">
+                    Learn more <i class="fas fa-arrow-right text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Kirtland Creamery -->
+            <div class="bg-white rounded-xl p-8 shadow-sm border border-stone-200 flex flex-col">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="../assets/mirrored-images/9f147c946b8f7282d1de01a8c9450ef5210f4a35737e30adec31c3392fe163ea.png" alt="Kirtland Creamery Logo" class="w-16 h-16 object-contain">
+                    <h3 class="text-2xl font-bold text-stone-900">Kirtland Creamery</h3>
+                </div>
+                <p class="text-stone-600 mb-6 leading-relaxed flex-grow">
+                    Kirtland Creamery is a beloved, family-owned ice cream shop located in Northeast Ohio. Known for serving the best and most delicious ice cream in the area, Kirtland Creamery offers a wide variety of flavors, from classic favorites to unique creations. Visitors can enjoy their treats on a beautiful, covered patio or outside under a picnic table umbrella. The creamery also boasts a new playground, making it a fun and comfortable spot for families.
+                </p>
+                <a href="https://kirtlandcreamery.com/" target="_blank" class="text-indigo-600 font-bold hover:text-indigo-800 hover:underline inline-flex items-center gap-2">
+                    Learn more <i class="fas fa-arrow-right text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Angelo's Pizzeria -->
+            <div class="bg-white rounded-xl p-8 shadow-sm border border-stone-200 flex flex-col">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="../assets/mirrored-images/c049cb7b5f77892a41d27023abafb77f0fb1dddef3b4990df4040fcfac9bb528.png" alt="Angelo's Pizzeria Logo" class="w-16 h-16 object-contain">
+                    <h3 class="text-2xl font-bold text-stone-900">Angelo's Pizzeria</h3>
+                </div>
+                <p class="text-stone-600 mb-6 leading-relaxed flex-grow">
+                    Angelo's Pizzeria in Kirtland, Ohio, is a cherished family-owned restaurant serving the community for over 20 years. Known for its warm, welcoming atmosphere, Angelo's offers a delightful menu featuring classic Italian dishes and American favorites. From delicious, homemade pizzas and calzones to fresh salads, pasta, and sandwiches, there's something for everyone.
+                </p>
+                <a href="https://angeloskirtland.com/" target="_blank" class="text-indigo-600 font-bold hover:text-indigo-800 hover:underline inline-flex items-center gap-2">
+                    Visit Website <i class="fas fa-arrow-right text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Yours Truly Restaurants -->
+            <div class="bg-white rounded-xl p-8 shadow-sm border border-stone-200 flex flex-col">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="../assets/mirrored-images/006088cb0a9f82fc6083b40d29e83d1fbb29dddcb8c2a5f36a11d68e0bd488c8.png" alt="Yours Truly Restaurants Logo" class="w-16 h-16 object-contain">
+                    <h3 class="text-2xl font-bold text-stone-900">Yours Truly Restaurants</h3>
+                </div>
+                <p class="text-stone-600 mb-6 leading-relaxed flex-grow">
+                    Yours Truly Restaurants have been a beloved dining destination in Northeast Ohio since 1981. They offer a welcoming atmosphere and a diverse menu that caters to all tastes, from hearty breakfasts and fresh salads to mouth-watering burgers and classic comfort foods. Known for their friendly service and commitment to quality.
+                </p>
+                <a href="https://ytr.com/mentor/" target="_blank" class="text-indigo-600 font-bold hover:text-indigo-800 hover:underline inline-flex items-center gap-2">
+                    Check out full menu <i class="fas fa-arrow-right text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Down The Block -->
+            <div class="bg-white rounded-xl p-8 shadow-sm border border-stone-200 flex flex-col">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="../assets/mirrored-images/3d2507df758128c1dc72a72a3091367c11e81aca4b0940464028998e23a05c96.png" alt="Down The Block Logo" class="w-16 h-16 object-contain">
+                    <h3 class="text-2xl font-bold text-stone-900">Down The Block</h3>
+                </div>
+                <p class="text-stone-600 mb-6 leading-relaxed flex-grow">
+                    Down The Block is a cozy and welcoming restaurant specializing in delicious food delivery and takeaway services. Their menu features a range of tasty dishes, from hearty comfort foods to healthy salads and sandwiches. Popular choices include a variety of pizzas, calzones, wings, and gourmet salads.
+                </p>
+                <a href="https://www.downtheblockeats.com/welcome/" target="_blank" class="text-indigo-600 font-bold hover:text-indigo-800 hover:underline inline-flex items-center gap-2">
+                    Visit Website <i class="fas fa-arrow-right text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Crowley's Dive Bar -->
+            <div class="bg-white rounded-xl p-8 shadow-sm border border-stone-200 flex flex-col">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="../assets/mirrored-images/171fd289c825803860a135d8cee47f83e1f690c811a231e3ad58dff74f9f324a.png" alt="Crowley's Dive Bar Logo" class="w-16 h-16 object-contain">
+                    <h3 class="text-2xl font-bold text-stone-900">Crowley's Dive Bar</h3>
+                </div>
+                <p class="text-stone-600 mb-6 leading-relaxed flex-grow">
+                    Crowley's Dive Bar is a beloved neighborhood spot known for its relaxed, unpretentious atmosphere and delicious food. Located at 9378 Chillicothe Rd, Crowley's offers a diverse menu featuring hearty burgers, fresh salads, and decadent desserts. The perfect place for a casual meal with friends.
+                </p>
+                <a href="https://www.crowleysdive.com/" target="_blank" class="text-indigo-600 font-bold hover:text-indigo-800 hover:underline inline-flex items-center gap-2">
+                    Explore Menu <i class="fas fa-arrow-right text-sm"></i>
+                </a>
+            </div>
+
+            <!-- MISSION BBQ -->
+            <div class="bg-white rounded-xl p-8 shadow-sm border border-stone-200 flex flex-col">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="../assets/mirrored-images/b4fdd2a1574bda2e516117ae0b9a7d252727e830bfbcc0d98163d6dbf52c73f6.png" alt="MISSION BBQ Logo" class="w-16 h-16 object-contain">
+                    <h3 class="text-2xl font-bold text-stone-900">MISSION BBQ</h3>
+                </div>
+                <p class="text-stone-600 mb-6 leading-relaxed flex-grow">
+                    MISSION BBQ is dedicated to serving authentic, mouth-watering all-American barbecue. Founded with a mission to honor and support our nation's heroes, they offer a menu filled with delicious smoked meats, classic sides, and seasonal specialties. Each item is carefully prepared using traditional methods.
+                </p>
+                <a href="https://mission-bbq.com/" target="_blank" class="text-indigo-600 font-bold hover:text-indigo-800 hover:underline inline-flex items-center gap-2">
+                    Visit Website <i class="fas fa-arrow-right text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Sausalito Kirtland -->
+            <div class="bg-white rounded-xl p-8 shadow-sm border border-stone-200 flex flex-col">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="../assets/mirrored-images/59450983bcf08557639c387ec9511e600501125eed7a127a55ac0df9c33e4f8b.png" alt="Sausalito Kirtland Logo" class="w-16 h-16 object-contain">
+                    <h3 class="text-2xl font-bold text-stone-900">Sausalito Kirtland</h3>
+                </div>
+                <p class="text-stone-600 mb-6 leading-relaxed flex-grow">
+                    Sausalito Kirtland is Kirtland's premier restaurant and caterer, offering a delightful dining experience with a focus on high-quality, locally sourced cuisine. The menu features small plates, soups, salads, pastas, and main dishes, all crafted with care. Guests can also enjoy a curated selection of wines and cocktails.
+                </p>
+                <a href="https://sausalitokirtland.com/" target="_blank" class="text-indigo-600 font-bold hover:text-indigo-800 hover:underline inline-flex items-center gap-2">
+                    Learn more <i class="fas fa-arrow-right text-sm"></i>
+                </a>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

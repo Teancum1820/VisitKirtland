@@ -233,7 +233,8 @@ function Get-OrDownloadImageAsset([string]$url) {
         $contentType = $null
     }
 
-    if ($uri.AbsolutePath -notmatch '\.(png|jpe?g|gif|webp|avif|svg)$' -and ($contentType -notmatch '^image/')) {
+    $knownImageHost = $uri.Host -match '(?i)(imgur|googleusercontent|gstatic|cloudfront|squarespace|wp-content|encrypted-tbn|images|cdn)'
+    if ($uri.AbsolutePath -notmatch '\.(png|jpe?g|gif|webp|avif|svg)$' -and ($contentType -notmatch '^image/') -and -not $knownImageHost) {
         return $url
     }
 
@@ -304,6 +305,99 @@ function Rewrite-RemoteImageUrls([string]$html, [string]$fromOutput) {
     return $html
 }
 
+function Optimize-ImageTags([string]$html) {
+    return [regex]::Replace($html, '<img\b[^>]*>', {
+        param($match)
+        $tag = $match.Value
+        if ($tag -notmatch '\bdecoding=') {
+            $tag = $tag -replace '>$', ' decoding="async">'
+        }
+        if ($tag -notmatch '\bloading=' -and $tag -notmatch '\bfetchpriority=') {
+            $tag = $tag -replace '>$', ' loading="lazy">'
+        }
+        return $tag
+    }, [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+}
+
+function Get-SeoData([string]$output) {
+    $path = ($output -replace '\\', '/')
+    $slug = ($path -replace '/?index\.html$', '').Trim('/')
+
+    switch ($slug) {
+        '' {
+            return @{ Title = 'Visit Kirtland Ohio | Faith, History, Nature & Heritage Days'; Description = 'Plan a visit to Kirtland, Ohio with historic sites, worship locations, restaurants, lodging, nature preserves, and Kirtland Heritage Days.' }
+        }
+        'home' {
+            return @{ Title = 'Visit Kirtland Ohio | Faith, History, Nature & Heritage Days'; Description = 'Explore Kirtland, Ohio historic sites, family activities, parks, restaurants, lodging, and community events.' }
+        }
+        'kirtland-heritage-days/2027-kirtland-heritage-days' {
+            return @{ Title = '2027 Kirtland Heritage Days | Countdown & Family Reunions'; Description = 'Countdown to 2027 Kirtland Heritage Days on Friday, June 18, 2027, with announced Granger and Phelps family reunions.' }
+        }
+        'kirtland-heritage-days/2026-kirtland-heritage-days' {
+            return @{ Title = '2026 Kirtland Heritage Days Archive | Photo Album'; Description = 'View the 2026 Kirtland Heritage Days archive and photo album from the finished celebration in Kirtland, Ohio.' }
+        }
+        'kirtland-heritage-days/2025-kirtland-heritage-days' {
+            return @{ Title = '2025 Kirtland Heritage Days Archive | Visit Kirtland'; Description = 'Archive page for 2025 Kirtland Heritage Days, including event details and memories from the Kirtland celebration.' }
+        }
+        'kirtland-heritage-days/2024-kirtland-heritage-days' {
+            return @{ Title = '2024 Kirtland Heritage Days Archive | Visit Kirtland'; Description = 'Archive page for 2024 Kirtland Heritage Days and past community celebration details.' }
+        }
+        'church-history-locations' {
+            return @{ Title = 'Church History Locations in Kirtland, Ohio | Visit Kirtland'; Description = 'Find historic church history locations in Kirtland, Ohio, including temples, visitor centers, and restored historic sites.' }
+        }
+        'local-houses-of-worship' {
+            return @{ Title = 'Local Houses of Worship in Kirtland, Ohio | Visit Kirtland'; Description = 'Explore churches, congregations, and local houses of worship near Kirtland, Ohio.' }
+        }
+        'things-to-do-near-cleveland' {
+            return @{ Title = 'Things To Do Near Kirtland and Cleveland | Visit Kirtland'; Description = 'Discover parks, museums, beaches, family attractions, and things to do near Kirtland and Cleveland, Ohio.' }
+        }
+        'lodging' {
+            return @{ Title = 'Lodging Near Kirtland, Ohio | Visit Kirtland'; Description = 'Find hotels, inns, and places to stay near Kirtland, Ohio for Heritage Days, reunions, and historic site visits.' }
+        }
+        'restaurants' {
+            return @{ Title = 'Restaurants Near Kirtland, Ohio | Visit Kirtland'; Description = 'Find local restaurants, cafes, pizza, dessert, and dining options near Kirtland, Ohio.' }
+        }
+        default {
+            return @{ Title = 'Visit Kirtland Ohio'; Description = 'Visit Kirtland, Ohio for faith, history, nature, restaurants, lodging, and community events.' }
+        }
+    }
+}
+
+function Apply-SeoTags([string]$html, [string]$output) {
+    $seo = Get-SeoData $output
+    $title = [System.Net.WebUtility]::HtmlEncode($seo.Title)
+    $description = [System.Net.WebUtility]::HtmlEncode($seo.Description)
+    $path = ConvertTo-SiteUrlPath $output
+    $canonicalPath = if ([string]::IsNullOrEmpty($path)) { '/' } else { '/' + $path.TrimStart('/') }
+    $canonical = "https://www.visitkirtland.com$canonicalPath"
+
+    if ($html -match '<title>.*?</title>') {
+        $html = [regex]::Replace($html, '<title>.*?</title>', "<title>$title</title>", [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)
+    } else {
+        $html = [regex]::Replace($html, '</head>', "  <title>$title</title>`n</head>", [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    }
+
+    if ($html -match '<meta\s+name=["'']description["'']') {
+        $html = [regex]::Replace($html, '<meta\s+name=["'']description["''][^>]*>', "<meta name=`"description`" content=`"$description`">", [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    } else {
+        $html = [regex]::Replace($html, '</head>', "  <meta name=`"description`" content=`"$description`">`n</head>", [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    }
+
+    if ($html -notmatch '<link\s+rel=["'']canonical["'']') {
+        $seoHead = @"
+  <link rel="canonical" href="$canonical">
+  <meta property="og:title" content="$title">
+  <meta property="og:description" content="$description">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="$canonical">
+  <meta name="twitter:card" content="summary_large_image">
+"@
+        $html = [regex]::Replace($html, '</head>', "$seoHead`n</head>", [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    }
+
+    return $html
+}
+
 function Ensure-RemoteImageFile([string]$url, [string]$targetRelative) {
     $targetAbsolute = Join-Path $rootPath $targetRelative
     if (Test-Path -LiteralPath $targetAbsolute) {
@@ -332,7 +426,7 @@ function New-Navigation([string]$fromOutput) {
     return @"
 <header class="site-header" data-site-header>
   <a class="site-brand" href="$rootHref" aria-label="Visit Kirtland home">
-    <span class="site-brand-mark"><img src="$logo" alt=""></span>
+    <span class="site-brand-mark"><img src="$logo" alt="" width="48" height="48" decoding="async" fetchpriority="high"></span>
     <span class="site-brand-text"><strong>Visit Kirtland</strong><span>The City of Faith &amp; Beauty</span></span>
   </a>
   <button class="site-nav-toggle" type="button" aria-label="Open navigation" aria-controls="site-navigation" aria-expanded="false" data-site-nav-toggle>
@@ -343,10 +437,10 @@ function New-Navigation([string]$fromOutput) {
     <div class="site-dropdown" data-site-dropdown>
       <button class="site-dropdown-toggle" type="button" aria-expanded="false" data-nav-key="heritage" data-site-dropdown-toggle>Heritage Days <span class="site-caret"></span></button>
       <div class="site-dropdown-menu">
-        <a href="$heritage2027Href" data-nav-key="heritage-2027">2027 Heritage Days</a>
-        <a href="$heritage2026Href" data-nav-key="heritage-2026">2026 Archive</a>
-        <a href="$heritage2025Href" data-nav-key="heritage-2025">2025 Archive</a>
-        <a href="$heritage2024Href" data-nav-key="heritage-2024">2024 Archive</a>
+        <a href="$heritage2027Href" data-nav-key="heritage-2027">2027</a>
+        <a href="$heritage2026Href" data-nav-key="heritage-2026">2026</a>
+        <a href="$heritage2025Href" data-nav-key="heritage-2025">2025</a>
+        <a href="$heritage2024Href" data-nav-key="heritage-2024">2024</a>
       </div>
     </div>
     <a href="$historyHref" data-nav-key="history">Church History</a>
@@ -388,6 +482,8 @@ function Add-SiteChrome([string]$html, [string]$output, [string]$navKey) {
     }, [Text.RegularExpressions.RegexOptions]::IgnoreCase)
 
     $html = Rewrite-RemoteImageUrls $html $output
+    $html = Optimize-ImageTags $html
+    $html = Apply-SeoTags $html $output
 
     return $html
 }
@@ -396,6 +492,7 @@ function Write-OutputFile([string]$relativePath, [string]$content) {
     $target = Join-Path $sitePath $relativePath
     $targetDir = Split-Path -Parent $target
     New-Item -ItemType Directory -Path $targetDir -Force | Out-Null
+    $content = [regex]::Replace($content, '[ \t]+(?=\r?\n)', '')
     [IO.File]::WriteAllText($target, $content, $utf8)
 }
 
@@ -472,10 +569,6 @@ function New-HeritageArchivePage([string]$output) {
 }
 
 function New-Heritage2027Page([string]$output) {
-    $albumUrl = 'https://photos.google.com/share/AF1QipNkapuIqFEPDX31DVDTN1VQdrL9kPa6HEWOXrBe7qPDBOWIpoojzgA-xN4mP27nlg?key=cGpWQi1Cc2JhS19yNmk0R01DdWpINTJTMTVHOXdB'
-    $archive2026Href = Get-RelativePath $output 'kirtland-heritage-days\2026-kirtland-heritage-days\index.html' $true
-    $archive2025Href = Get-RelativePath $output 'kirtland-heritage-days\2025-kirtland-heritage-days\index.html' $true
-    $archive2024Href = Get-RelativePath $output 'kirtland-heritage-days\2024-kirtland-heritage-days\index.html' $true
     $baseImage = Get-RelativePath $output 'assets\mirrored-images\site-hero.jpeg' $false
 
     $body = @"
@@ -486,9 +579,6 @@ function New-Heritage2027Page([string]$output) {
     <p class="site-kicker">Upcoming</p>
     <h1>2027 Kirtland Heritage Days</h1>
     <p>Friday, June 18, 2027</p>
-    <div class="site-action-row">
-      <a class="site-button site-button-secondary" href="$archive2026Href">2026 Archive</a>
-    </div>
     <div class="site-countdown" aria-label="Countdown to June 18, 2027">
       <div class="site-countdown-box"><span id="vk-days">--</span><small>Days</small></div>
       <div class="site-countdown-box"><span id="vk-hours">--</span><small>Hours</small></div>
@@ -508,15 +598,6 @@ function New-Heritage2027Page([string]$output) {
       <article class="site-card" style="padding:24px;">
         <h3 style="margin-top:0;">Families announced</h3>
         <p style="color:rgba(23,35,31,0.76); line-height:1.75;">Oliver &amp; Lydia Granger descendants. W.W. and Sally Phelps descendants. More family reunions will be added as they are confirmed.</p>
-      </article>
-      <article class="site-card" style="padding:24px;">
-        <h3 style="margin-top:0;">Archive links</h3>
-        <p style="color:rgba(23,35,31,0.76); line-height:1.75;">Review the earlier gatherings for context and planning.</p>
-        <div class="site-action-row" style="justify-content:flex-start; margin-top:16px;">
-          <a class="site-button" href="$archive2026Href">2026</a>
-          <a class="site-button site-button-secondary" href="$archive2025Href">2025</a>
-          <a class="site-button site-button-secondary" href="$archive2024Href">2024</a>
-        </div>
       </article>
     </div>
   </section>
@@ -571,7 +652,9 @@ $bodyHtml
 </body>
 </html>
 "@
-    return (Rewrite-RemoteImageUrls $page $output)
+    $page = Rewrite-RemoteImageUrls $page $output
+    $page = Optimize-ImageTags $page
+    return (Apply-SeoTags $page $output)
 }
 
 Write-OutputFile 'kirtland-heritage-days\2026-kirtland-heritage-days\index.html' (New-HeritageArchivePage 'kirtland-heritage-days\2026-kirtland-heritage-days\index.html')
@@ -581,8 +664,11 @@ foreach ($homeOutput in @('index.html', 'home\index.html')) {
     $homePath = Join-Path $sitePath $homeOutput
     if (Test-Path -LiteralPath $homePath) {
         $homeHtml = Get-Content -LiteralPath $homePath -Raw
-        $homeHtml = $homeHtml.Replace('../kirtland-heritage-days/2026-kirtland-heritage-days/', '../kirtland-heritage-days/2027-kirtland-heritage-days/')
-        $homeHtml = $homeHtml.Replace('kirtland-heritage-days/2026-kirtland-heritage-days/', 'kirtland-heritage-days/2027-kirtland-heritage-days/')
+        $homeHtml = [regex]::Replace($homeHtml, 'href=(["''])(\.\./)?kirtland-heritage-days/2026-kirtland-heritage-days/\1([^>]*>\s*Event Details)', {
+            param($match)
+            $prefix = $match.Groups[2].Value
+            return "href=$($match.Groups[1].Value)$($prefix)kirtland-heritage-days/2027-kirtland-heritage-days/$($match.Groups[1].Value)$($match.Groups[3].Value)"
+        }, [Text.RegularExpressions.RegexOptions]::IgnoreCase)
         [IO.File]::WriteAllText($homePath, $homeHtml, $utf8)
     }
 }

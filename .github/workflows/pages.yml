@@ -25,10 +25,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build static site
-        shell: pwsh
-        run: ./tools/build-site.ps1
-
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

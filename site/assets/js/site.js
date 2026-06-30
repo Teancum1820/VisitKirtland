@@ -48,8 +48,6 @@
     if (!button) return;
 
     button.addEventListener("click", () => {
-      const smallScreen = window.matchMedia("(max-width: 980px)").matches;
-      if (!smallScreen) return;
       const open = !dropdown.classList.contains("is-open");
       dropdown.classList.toggle("is-open", open);
       button.setAttribute("aria-expanded", String(open));

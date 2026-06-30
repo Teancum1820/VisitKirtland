@@ -37,7 +37,15 @@
   </button>
   <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-site-nav>
     <a href="../../home/" data-nav-key="home">Home</a>
-    <a href="../2027-kirtland-heritage-days/" data-nav-key="heritage">Heritage Days</a>
+    <div class="site-dropdown" data-site-dropdown>
+      <button class="site-dropdown-toggle" type="button" aria-expanded="false" data-nav-key="heritage" data-site-dropdown-toggle>Heritage Days <span class="site-caret"></span></button>
+      <div class="site-dropdown-menu">
+        <a href="../2027-kirtland-heritage-days/" data-nav-key="heritage-2027">2027 Heritage Days</a>
+        <a href="../2026-kirtland-heritage-days/" data-nav-key="heritage-2026">2026 Archive</a>
+        <a href="../2025-kirtland-heritage-days/" data-nav-key="heritage-2025">2025 Archive</a>
+        <a href="./" data-nav-key="heritage-2024">2024 Archive</a>
+      </div>
+    </div>
     <a href="../../church-history-locations/" data-nav-key="history">Church History</a>
     <a href="../../local-houses-of-worship/" data-nav-key="worship">Worship</a>
     <a href="../../things-to-do-near-cleveland/" data-nav-key="things">Things To Do</a>

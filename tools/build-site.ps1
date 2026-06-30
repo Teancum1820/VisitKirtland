@@ -318,7 +318,10 @@ function Ensure-RemoteImageFile([string]$url, [string]$targetRelative) {
 function New-Navigation([string]$fromOutput) {
     $homeHref = Get-RelativePath $fromOutput 'home\index.html' $true
     $rootHref = Get-RelativePath $fromOutput 'index.html' $true
+    $heritage2026Href = Get-RelativePath $fromOutput 'kirtland-heritage-days\2026-kirtland-heritage-days\index.html' $true
     $heritage2027Href = Get-RelativePath $fromOutput 'kirtland-heritage-days\2027-kirtland-heritage-days\index.html' $true
+    $heritage2025Href = Get-RelativePath $fromOutput 'kirtland-heritage-days\2025-kirtland-heritage-days\index.html' $true
+    $heritage2024Href = Get-RelativePath $fromOutput 'kirtland-heritage-days\2024-kirtland-heritage-days\index.html' $true
     $historyHref = Get-RelativePath $fromOutput 'church-history-locations\index.html' $true
     $worshipHref = Get-RelativePath $fromOutput 'local-houses-of-worship\index.html' $true
     $thingsHref = Get-RelativePath $fromOutput 'things-to-do-near-cleveland\index.html' $true
@@ -337,7 +340,15 @@ function New-Navigation([string]$fromOutput) {
   </button>
   <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-site-nav>
     <a href="$homeHref" data-nav-key="home">Home</a>
-    <a href="$heritage2027Href" data-nav-key="heritage">Heritage Days</a>
+    <div class="site-dropdown" data-site-dropdown>
+      <button class="site-dropdown-toggle" type="button" aria-expanded="false" data-nav-key="heritage" data-site-dropdown-toggle>Heritage Days <span class="site-caret"></span></button>
+      <div class="site-dropdown-menu">
+        <a href="$heritage2027Href" data-nav-key="heritage-2027">2027 Heritage Days</a>
+        <a href="$heritage2026Href" data-nav-key="heritage-2026">2026 Archive</a>
+        <a href="$heritage2025Href" data-nav-key="heritage-2025">2025 Archive</a>
+        <a href="$heritage2024Href" data-nav-key="heritage-2024">2024 Archive</a>
+      </div>
+    </div>
     <a href="$historyHref" data-nav-key="history">Church History</a>
     <a href="$worshipHref" data-nav-key="worship">Worship</a>
     <a href="$thingsHref" data-nav-key="things">Things To Do</a>
@@ -462,7 +473,6 @@ function New-HeritageArchivePage([string]$output) {
 
 function New-Heritage2027Page([string]$output) {
     $albumUrl = 'https://photos.google.com/share/AF1QipNkapuIqFEPDX31DVDTN1VQdrL9kPa6HEWOXrBe7qPDBOWIpoojzgA-xN4mP27nlg?key=cGpWQi1Cc2JhS19yNmk0R01DdWpINTJTMTVHOXdB'
-    $albumHref = [System.Net.WebUtility]::HtmlEncode($albumUrl)
     $archive2026Href = Get-RelativePath $output 'kirtland-heritage-days\2026-kirtland-heritage-days\index.html' $true
     $archive2025Href = Get-RelativePath $output 'kirtland-heritage-days\2025-kirtland-heritage-days\index.html' $true
     $archive2024Href = Get-RelativePath $output 'kirtland-heritage-days\2024-kirtland-heritage-days\index.html' $true
@@ -477,7 +487,6 @@ function New-Heritage2027Page([string]$output) {
     <h1>2027 Kirtland Heritage Days</h1>
     <p>Friday, June 18, 2027</p>
     <div class="site-action-row">
-      <a class="site-button" href="$albumHref" target="_blank" rel="noopener">2026 Photo Album</a>
       <a class="site-button site-button-secondary" href="$archive2026Href">2026 Archive</a>
     </div>
     <div class="site-countdown" aria-label="Countdown to June 18, 2027">
@@ -648,7 +657,8 @@ foreach ($legacy in $legacyRedirects.GetEnumerator()) {
 [IO.File]::WriteAllText((Join-Path $sitePath 'robots.txt'), "User-agent: *`nAllow: /`nSitemap: https://www.visitkirtland.com/sitemap.xml`n", $utf8)
 
 $routesForSitemap = @(
-    '/', '/home/', '/kirtland-heritage-days/2026-kirtland-heritage-days/',
+    '/', '/home/', '/kirtland-heritage-days/2027-kirtland-heritage-days/',
+    '/kirtland-heritage-days/2026-kirtland-heritage-days/',
     '/kirtland-heritage-days/2025-kirtland-heritage-days/',
     '/kirtland-heritage-days/2024-kirtland-heritage-days/',
     '/church-history-locations/', '/local-houses-of-worship/',

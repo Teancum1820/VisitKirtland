@@ -17,7 +17,7 @@ New-Item -ItemType Directory -Path $sitePath -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $rootPath 'assets') -Destination $sitePath -Recurse -Force
 
 $utf8 = New-Object Text.UTF8Encoding($false)
-$assetVersion = '20260630.3'
+$assetVersion = '20260630.4'
 $routeMap = @{}
 $mirrorRoot = Join-Path $rootPath 'assets\mirrored-images'
 
@@ -50,6 +50,7 @@ $pages = @(
 Add-Route '/' 'index.html'
 Add-Route '/home' 'home\index.html'
 Add-Route '/kirtland-heritage-days/2026-kirtland-heritage-days' 'kirtland-heritage-days\2026-kirtland-heritage-days\index.html'
+Add-Route '/kirtland-heritage-days/2027-kirtland-heritage-days' 'kirtland-heritage-days\2027-kirtland-heritage-days\index.html'
 Add-Route '/kirtland-heritage-days/2025-kirtland-heritage-days' 'kirtland-heritage-days\2025-kirtland-heritage-days\index.html'
 Add-Route '/kirtland-heritage-days/2024-kirtland-heritage-days' 'kirtland-heritage-days\2024-kirtland-heritage-days\index.html'
 Add-Route '/church-history-locations' 'church-history-locations\index.html'
@@ -87,6 +88,10 @@ function Get-RelativePath([string]$fromOutput, [string]$targetPath, [bool]$targe
     $relative = $fromUri.MakeRelativeUri($targetUri).ToString()
     if ([string]::IsNullOrEmpty($relative)) { return './' }
     return $relative
+}
+
+function Get-LogoHref([string]$fromOutput) {
+    return ((Get-RelativePath $fromOutput 'assets\VK Logo.png' $false) -replace ' ', '%20')
 }
 
 function Repair-Mojibake([string]$html) {
@@ -313,15 +318,13 @@ function Ensure-RemoteImageFile([string]$url, [string]$targetRelative) {
 function New-Navigation([string]$fromOutput) {
     $homeHref = Get-RelativePath $fromOutput 'home\index.html' $true
     $rootHref = Get-RelativePath $fromOutput 'index.html' $true
-    $heritage2026Href = Get-RelativePath $fromOutput 'kirtland-heritage-days\2026-kirtland-heritage-days\index.html' $true
-    $heritage2025Href = Get-RelativePath $fromOutput 'kirtland-heritage-days\2025-kirtland-heritage-days\index.html' $true
-    $heritage2024Href = Get-RelativePath $fromOutput 'kirtland-heritage-days\2024-kirtland-heritage-days\index.html' $true
+    $heritage2027Href = Get-RelativePath $fromOutput 'kirtland-heritage-days\2027-kirtland-heritage-days\index.html' $true
     $historyHref = Get-RelativePath $fromOutput 'church-history-locations\index.html' $true
     $worshipHref = Get-RelativePath $fromOutput 'local-houses-of-worship\index.html' $true
     $thingsHref = Get-RelativePath $fromOutput 'things-to-do-near-cleveland\index.html' $true
     $lodgingHref = Get-RelativePath $fromOutput 'lodging\index.html' $true
     $diningHref = Get-RelativePath $fromOutput 'restaurants\index.html' $true
-    $logo = 'https://i.imgur.com/Cy0qkfq.png'
+    $logo = Get-LogoHref $fromOutput
 
     return @"
 <header class="site-header" data-site-header>
@@ -334,14 +337,7 @@ function New-Navigation([string]$fromOutput) {
   </button>
   <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-site-nav>
     <a href="$homeHref" data-nav-key="home">Home</a>
-    <div class="site-dropdown" data-site-dropdown>
-      <button class="site-dropdown-toggle" type="button" aria-expanded="false" data-nav-key="heritage" data-site-dropdown-toggle>Heritage Days <span class="site-caret"></span></button>
-      <div class="site-dropdown-menu">
-        <a href="$heritage2026Href" data-nav-key="heritage-2026">2026 Heritage Days</a>
-        <a href="$heritage2025Href" data-nav-key="heritage-2025">2025 Archive</a>
-        <a href="$heritage2024Href" data-nav-key="heritage-2024">2024 Archive</a>
-      </div>
-    </div>
+    <a href="$heritage2027Href" data-nav-key="heritage">Heritage Days</a>
     <a href="$historyHref" data-nav-key="history">Church History</a>
     <a href="$worshipHref" data-nav-key="worship">Worship</a>
     <a href="$thingsHref" data-nav-key="things">Things To Do</a>
@@ -357,7 +353,8 @@ Ensure-RemoteImageFile 'https://i.imgur.com/NCXUYPU.jpeg' 'assets\mirrored-image
 function Add-SiteChrome([string]$html, [string]$output, [string]$navKey) {
     $css = (Get-RelativePath $output 'assets\css\site.css' $false) + "?v=$assetVersion"
     $js = (Get-RelativePath $output 'assets\js\site.js' $false) + "?v=$assetVersion"
-    $head = "    <link rel=`"stylesheet`" href=`"$css`">`n    <script defer src=`"$js`"></script>"
+    $logo = Get-LogoHref $output
+    $head = "    <link rel=`"stylesheet`" href=`"$css`">`n    <script defer src=`"$js`"></script>`n    <link rel=`"icon`" type=`"image/png`" href=`"$logo`">"
     $html = [regex]::Replace($html, '</head>', "$head`n</head>", [Text.RegularExpressions.RegexOptions]::IgnoreCase)
 
     $html = [regex]::Replace($html, '<body([^>]*)>', {
@@ -398,9 +395,153 @@ foreach ($page in $pages) {
     Write-OutputFile $page.Output $html
 }
 
+function New-HeritageArchivePage([string]$output) {
+    $albumUrl = 'https://photos.google.com/share/AF1QipNkapuIqFEPDX31DVDTN1VQdrL9kPa6HEWOXrBe7qPDBOWIpoojzgA-xN4mP27nlg?key=cGpWQi1Cc2JhS19yNmk0R01DdWpINTJTMTVHOXdB'
+    $albumHref = [System.Net.WebUtility]::HtmlEncode($albumUrl)
+    $currentHref = Get-RelativePath $output 'kirtland-heritage-days\2027-kirtland-heritage-days\index.html' $true
+    $homeHref = Get-RelativePath $output 'home\index.html' $true
+    $baseImage = Get-RelativePath $output 'assets\mirrored-images\site-hero.jpeg' $false
+    $guestBrad = Get-RelativePath $output 'assets\mirrored-images\d391c223ae9744d0b85d83c0b3da167750a7ca2a6a669aec69375119bc3e43c4.png' $false
+    $guestNathan = Get-RelativePath $output 'assets\mirrored-images\203374d6ea5143cfd70c8a49e488cb81fc4a0c689cbcf24c3f7c9d8b8fcb520a.png' $false
+    $guestBonner = Get-RelativePath $output 'assets\mirrored-images\879bad67b0b63b38611c22aec702017cf2ab38e215eed390fb8725bd2de9374c.jpg' $false
+
+    $body = @"
+<header class="site-page-hero" style="background:
+  linear-gradient(135deg, rgba(13, 92, 76, 0.92), rgba(23, 35, 31, 0.82)),
+  url('$baseImage') center/cover;">
+  <div class="site-page-hero-inner">
+    <p class="site-kicker">Archive</p>
+    <h1>2026 Kirtland Heritage Days</h1>
+    <p>June 19-21, 2026</p>
+    <div class="site-action-row">
+      <a class="site-button" href="$albumHref" target="_blank" rel="noopener">2026 Photo Album</a>
+      <a class="site-button site-button-secondary" href="$currentHref">Go to 2027 Heritage Days</a>
+    </div>
+  </div>
+</header>
+<main class="site-app-main">
+  <section style="display:grid; gap:20px;">
+    <div style="display:grid; gap:12px; max-width: 980px; margin: 0 auto; text-align:center;">
+      <p class="site-kicker" style="color:var(--vk-forest);">A finished celebration</p>
+      <h2 style="font-family:'Playfair Display', serif; font-size:clamp(2rem, 4vw, 3rem); margin:0; color:var(--vk-ink);">The 2026 gathering is now part of the archive.</h2>
+      <p style="margin:0 auto; max-width: 760px; color:var(--vk-ink); font-size:1.05rem; line-height:1.7;">Browse the photo album, revisit the speakers and guests, and use the archive as the record of the weekend.</p>
+    </div>
+    <div class="site-page-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
+      <article class="site-card" style="overflow:hidden; border-radius:18px;">
+        <img src="$guestBrad" alt="Brad Wilcox" style="width:100%; height:240px; object-fit:cover; display:block;">
+        <div style="padding:18px 18px 22px;">
+          <h3 style="margin:0 0 6px; font-size:1.2rem;">Brad Wilcox</h3>
+          <p style="margin:0; color:rgba(23,35,31,0.72);">Featured speaker for 2026.</p>
+        </div>
+      </article>
+      <article class="site-card" style="overflow:hidden; border-radius:18px;">
+        <img src="$guestNathan" alt="Elder Nathan Johnson" style="width:100%; height:240px; object-fit:cover; display:block;">
+        <div style="padding:18px 18px 22px;">
+          <h3 style="margin:0 0 6px; font-size:1.2rem;">Elder Nathan Johnson</h3>
+          <p style="margin:0; color:rgba(23,35,31,0.72);">Featured guest speaker.</p>
+        </div>
+      </article>
+      <article class="site-card" style="overflow:hidden; border-radius:18px;">
+        <img src="$guestBonner" alt="The Bonner Family" style="width:100%; height:240px; object-fit:cover; display:block;">
+        <div style="padding:18px 18px 22px;">
+          <h3 style="margin:0 0 6px; font-size:1.2rem;">The Bonner Family</h3>
+          <p style="margin:0; color:rgba(23,35,31,0.72);">Music and family connection.</p>
+        </div>
+      </article>
+    </div>
+    <section style="display:grid; gap:14px; max-width: 980px; margin: 0 auto;">
+      <h3 style="margin:0; font-size:1.4rem;">Archive notes</h3>
+      <p style="margin:0; color:rgba(23,35,31,0.76); line-height:1.75;">Registration is closed. This page keeps the 2026 event in view for reference and directs visitors to the photo album for the finished weekend.</p>
+    </section>
+  </section>
+</main>
+"@
+
+    return New-StandalonePage $output '2026 Kirtland Heritage Days Archive | Visit Kirtland' 'Archive page for the 2026 Kirtland Heritage Days weekend.' 'heritage' $body
+}
+
+function New-Heritage2027Page([string]$output) {
+    $albumUrl = 'https://photos.google.com/share/AF1QipNkapuIqFEPDX31DVDTN1VQdrL9kPa6HEWOXrBe7qPDBOWIpoojzgA-xN4mP27nlg?key=cGpWQi1Cc2JhS19yNmk0R01DdWpINTJTMTVHOXdB'
+    $albumHref = [System.Net.WebUtility]::HtmlEncode($albumUrl)
+    $archive2026Href = Get-RelativePath $output 'kirtland-heritage-days\2026-kirtland-heritage-days\index.html' $true
+    $archive2025Href = Get-RelativePath $output 'kirtland-heritage-days\2025-kirtland-heritage-days\index.html' $true
+    $archive2024Href = Get-RelativePath $output 'kirtland-heritage-days\2024-kirtland-heritage-days\index.html' $true
+    $baseImage = Get-RelativePath $output 'assets\mirrored-images\site-hero.jpeg' $false
+
+    $body = @"
+<header class="site-page-hero" style="background:
+  linear-gradient(135deg, rgba(13, 92, 76, 0.92), rgba(23, 35, 31, 0.82)),
+  url('$baseImage') center/cover;">
+  <div class="site-page-hero-inner">
+    <p class="site-kicker">Upcoming</p>
+    <h1>2027 Kirtland Heritage Days</h1>
+    <p>Friday, June 18, 2027</p>
+    <div class="site-action-row">
+      <a class="site-button" href="$albumHref" target="_blank" rel="noopener">2026 Photo Album</a>
+      <a class="site-button site-button-secondary" href="$archive2026Href">2026 Archive</a>
+    </div>
+    <div class="site-countdown" aria-label="Countdown to June 18, 2027">
+      <div class="site-countdown-box"><span id="vk-days">--</span><small>Days</small></div>
+      <div class="site-countdown-box"><span id="vk-hours">--</span><small>Hours</small></div>
+      <div class="site-countdown-box"><span id="vk-minutes">--</span><small>Minutes</small></div>
+      <div class="site-countdown-box"><span id="vk-seconds">--</span><small>Seconds</small></div>
+    </div>
+  </div>
+</header>
+<main class="site-app-main">
+  <section style="display:grid; gap:24px;">
+    <div style="max-width: 980px; margin: 0 auto; text-align:center;">
+      <p class="site-kicker" style="color:var(--vk-forest);">Reunions and gathering</p>
+      <h2 style="font-family:'Playfair Display', serif; font-size:clamp(2rem, 4vw, 3rem); margin:0 0 14px; color:var(--vk-ink);">Descendants of the Oliver &amp; Lydia Granger Family, W.W. and Sally Phelps Family, and more to come.</h2>
+      <p style="margin:0 auto; max-width: 760px; color:var(--vk-ink); font-size:1.05rem; line-height:1.75;">The 2027 gathering is taking shape as a place for reunion, history, and connection in Kirtland.</p>
+    </div>
+    <div class="site-page-grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+      <article class="site-card" style="padding:24px;">
+        <h3 style="margin-top:0;">Families announced</h3>
+        <p style="color:rgba(23,35,31,0.76); line-height:1.75;">Oliver &amp; Lydia Granger descendants. W.W. and Sally Phelps descendants. More family reunions will be added as they are confirmed.</p>
+      </article>
+      <article class="site-card" style="padding:24px;">
+        <h3 style="margin-top:0;">Archive links</h3>
+        <p style="color:rgba(23,35,31,0.76); line-height:1.75;">Review the earlier gatherings for context and planning.</p>
+        <div class="site-action-row" style="justify-content:flex-start; margin-top:16px;">
+          <a class="site-button" href="$archive2026Href">2026</a>
+          <a class="site-button site-button-secondary" href="$archive2025Href">2025</a>
+          <a class="site-button site-button-secondary" href="$archive2024Href">2024</a>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+<script>
+(() => {
+  const target = new Date('2027-06-18T00:00:00-04:00');
+  const labels = ['vk-days', 'vk-hours', 'vk-minutes', 'vk-seconds'];
+  const parts = labels.map((id) => document.getElementById(id));
+
+  function tick() {
+    const delta = Math.max(0, target.getTime() - Date.now());
+    const totalSeconds = Math.floor(delta / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    const values = [days, hours, minutes, seconds];
+    parts.forEach((node, index) => { if (node) node.textContent = String(values[index]).padStart(2, '0'); });
+  }
+
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+"@
+
+    return New-StandalonePage $output '2027 Kirtland Heritage Days | Visit Kirtland' 'Countdown and announcement page for the 2027 Kirtland Heritage Days gathering.' 'heritage' $body
+}
+
 function New-StandalonePage([string]$output, [string]$title, [string]$description, [string]$navKey, [string]$bodyHtml, [string]$extraHead = '') {
     $css = (Get-RelativePath $output 'assets\css\site.css' $false) + "?v=$assetVersion"
     $js = (Get-RelativePath $output 'assets\js\site.js' $false) + "?v=$assetVersion"
+    $logo = Get-LogoHref $output
     $nav = New-Navigation $output
     $page = @"
 <!doctype html>
@@ -413,6 +554,7 @@ function New-StandalonePage([string]$output, [string]$title, [string]$descriptio
   $extraHead
   <link rel="stylesheet" href="$css">
   <script defer src="$js"></script>
+  <link rel="icon" type="image/png" href="$logo">
 </head>
 <body class="site-migrated site-page-body" data-nav-key="$navKey">
 $nav
@@ -421,6 +563,19 @@ $bodyHtml
 </html>
 "@
     return (Rewrite-RemoteImageUrls $page $output)
+}
+
+Write-OutputFile 'kirtland-heritage-days\2026-kirtland-heritage-days\index.html' (New-HeritageArchivePage 'kirtland-heritage-days\2026-kirtland-heritage-days\index.html')
+Write-OutputFile 'kirtland-heritage-days\2027-kirtland-heritage-days\index.html' (New-Heritage2027Page 'kirtland-heritage-days\2027-kirtland-heritage-days\index.html')
+
+foreach ($homeOutput in @('index.html', 'home\index.html')) {
+    $homePath = Join-Path $sitePath $homeOutput
+    if (Test-Path -LiteralPath $homePath) {
+        $homeHtml = Get-Content -LiteralPath $homePath -Raw
+        $homeHtml = $homeHtml.Replace('../kirtland-heritage-days/2026-kirtland-heritage-days/', '../kirtland-heritage-days/2027-kirtland-heritage-days/')
+        $homeHtml = $homeHtml.Replace('kirtland-heritage-days/2026-kirtland-heritage-days/', 'kirtland-heritage-days/2027-kirtland-heritage-days/')
+        [IO.File]::WriteAllText($homePath, $homeHtml, $utf8)
+    }
 }
 
 $appBody = @"

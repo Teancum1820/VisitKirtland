@@ -340,6 +340,52 @@ body.site-nav-open {
   padding: clamp(36px, 6vw, 72px) 0;
 }
 
+.site-page-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.site-card {
+  border: 1px solid rgba(23, 35, 31, 0.12);
+  background: rgba(255, 253, 248, 0.98);
+  box-shadow: 0 18px 42px rgba(23, 35, 31, 0.08);
+}
+
+.site-countdown {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  width: min(760px, 100%);
+  margin: 30px auto 0;
+}
+
+.site-countdown-box {
+  padding: 16px 12px 14px;
+  border: 1px solid rgba(255, 253, 248, 0.18);
+  border-radius: 18px;
+  background: rgba(255, 253, 248, 0.12);
+  backdrop-filter: blur(8px);
+  text-align: center;
+}
+
+.site-countdown-box span {
+  display: block;
+  font-family: "Cinzel", serif;
+  font-size: clamp(1.65rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.site-countdown-box small {
+  display: block;
+  margin-top: 8px;
+  color: rgba(255, 253, 248, 0.78);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
 .site-embed-shell {
   overflow: hidden;
   border: 1px solid rgba(23, 35, 31, 0.14);
@@ -486,6 +532,10 @@ body.site-nav-open {
   .site-page-hero {
     min-height: 36vh;
     padding-inline: 18px;
+  }
+
+  .site-countdown {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .site-action-row {

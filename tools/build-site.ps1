@@ -496,10 +496,22 @@ function Write-OutputFile([string]$relativePath, [string]$content) {
     [IO.File]::WriteAllText($target, $content, $utf8)
 }
 
+function Remove-HomepageEventsSection([string]$html) {
+    return [regex]::Replace(
+        $html,
+        '\s*<section id="events"[\s\S]*?</section>\s*(?=<section id="history")',
+        "`n`n    ",
+        [Text.RegularExpressions.RegexOptions]::IgnoreCase
+    )
+}
+
 foreach ($page in $pages) {
     $html = Get-SourceDocument $page
     $html = Rewrite-InternalLinks $html $page.Output
     $html = Add-SiteChrome $html $page.Output $page.NavKey
+    if ($page.Output -in @('index.html', 'home\index.html')) {
+        $html = Remove-HomepageEventsSection $html
+    }
     Write-OutputFile $page.Output $html
 }
 
@@ -669,6 +681,7 @@ foreach ($homeOutput in @('index.html', 'home\index.html')) {
             $prefix = $match.Groups[2].Value
             return "href=$($match.Groups[1].Value)$($prefix)kirtland-heritage-days/2027-kirtland-heritage-days/$($match.Groups[1].Value)$($match.Groups[3].Value)"
         }, [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+        $homeHtml = Remove-HomepageEventsSection $homeHtml
         [IO.File]::WriteAllText($homePath, $homeHtml, $utf8)
     }
 }

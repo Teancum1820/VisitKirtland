@@ -17,7 +17,7 @@ New-Item -ItemType Directory -Path $sitePath -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $rootPath 'assets') -Destination $sitePath -Recurse -Force
 
 $utf8 = New-Object Text.UTF8Encoding($false)
-$assetVersion = '20260630.4'
+$assetVersion = '20260914.1'
 $routeMap = @{}
 $mirrorRoot = Join-Path $rootPath 'assets\mirrored-images'
 
@@ -39,8 +39,8 @@ $pages = @(
     [pscustomobject]@{ Source = 'VK2.0\church-history-locations.html'; Type = 'embedded'; Output = 'church-history-locations\index.html'; NavKey = 'history' },
     [pscustomobject]@{ Source = 'VK2.0\local-houses-of-worship.html'; Type = 'embedded'; Output = 'local-houses-of-worship\index.html'; NavKey = 'worship' },
     [pscustomobject]@{ Source = 'VK2.0\things-to-do-near-cleveland.html'; Type = 'embedded'; Output = 'things-to-do-near-cleveland\index.html'; NavKey = 'things' },
-    [pscustomobject]@{ Source = 'VK2.0\lodging.html'; Type = 'embedded'; Output = 'lodging\index.html'; NavKey = 'lodging' },
-    [pscustomobject]@{ Source = 'VK2.0\restaurants.html'; Type = 'embedded'; Output = 'restaurants\index.html'; NavKey = 'dining' },
+    [pscustomobject]@{ Source = 'content\lodging.html'; Type = 'full'; Output = 'lodging\index.html'; NavKey = 'lodging' },
+    [pscustomobject]@{ Source = 'content\restaurants.html'; Type = 'full'; Output = 'restaurants\index.html'; NavKey = 'dining' },
     [pscustomobject]@{ Source = 'VK2.0\2026-family-reunions.html'; Type = 'embedded'; Output = '2026-family-reunions\index.html'; NavKey = 'family' },
     [pscustomobject]@{ Source = 'Harris Reunion.html'; Type = 'full'; Output = 'family-reunion\harris-reunion\index.html'; NavKey = 'family' },
     [pscustomobject]@{ Source = 'Millet Reunion.html'; Type = 'full'; Output = 'family-reunion\millet-reunion\index.html'; NavKey = 'family' },
@@ -443,11 +443,12 @@ function New-Navigation([string]$fromOutput) {
         <a href="$heritage2024Href" data-nav-key="heritage-2024">2024</a>
       </div>
     </div>
-    <a href="$historyHref" data-nav-key="history">Church History</a>
+    <a href="$historyHref" data-nav-key="history">LDS Church History</a>
     <a href="$worshipHref" data-nav-key="worship">Worship</a>
     <a href="$thingsHref" data-nav-key="things">Things To Do</a>
     <a href="$lodgingHref" data-nav-key="lodging">Lodging</a>
     <a href="$diningHref" data-nav-key="dining">Dining</a>
+    <a class="site-nav-cta" href="https://kirtlandheritagegroup.store/" target="_blank" rel="noopener noreferrer">Shop</a>
   </nav>
 </header>
 "@

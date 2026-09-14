@@ -423,7 +423,7 @@ body.site-nav-open {
   }
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1120px) {
   :root {
     --site-header-height: 72px;
   }

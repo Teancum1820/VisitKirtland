@@ -1,0 +1,15 @@
+{
+  "enabled": false,
+  "allowedHosts": [
+    "visitkirtland.com",
+    "www.visitkirtland.com"
+  ],
+  "allowLocalTesting": false,
+  "privacyNoticeUrl": "",
+  "ga4MeasurementId": "G-1WEVH2BDTJ",
+  "metaPixelId": "",
+  "metricoolHash": "",
+  "formTypes": [],
+  "contentRoutes": {},
+  "linkEvents": {}
+}

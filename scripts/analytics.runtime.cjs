@@ -307,6 +307,10 @@ test("URL-reading vendors do not receive sensitive referrer queries", async () =
     "https://example.com/",
   );
 });
+test("campaign referrers and consented Meta click attribution survive while Metricool does not receive fbclid",async()=>{
+ const a=await setup({}, {url:'https://neochosen.com/piano-guys/?utm_source=facebook&fbclid=CampaignClick_Example',referrer:'https://neochosen.com/?utm_source=facebook&utm_medium=paid_social',saved:{analytics:true,marketing:true}});
+ assert.equal(a.window.fbq.queue.filter(c=>c[1]==='PageView').length,1);assert.equal(a.document.getElementById('khg-metricool'),undefined);assert.ok(!a.commands().find(c=>c[0]==='config')[2].page_location.includes('fbclid'));
+});
 test("withdrawal applies denial and reloads to stop automatic vendor events", async () => {
   const a = await setup({}, { saved: { analytics: true, marketing: true } });
   a.window.KHGAnalytics.setConsent({ analytics: false, marketing: false });

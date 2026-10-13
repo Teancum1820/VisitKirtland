@@ -108,14 +108,19 @@
       }
     }
     // Meta and Metricool read the real document URL. Suppress on sensitive query strings.
-    const safeDocumentUrl =
-      [...new URL(location.href).searchParams.keys()].every((k) =>
-        Object.hasOwn(utms(), k),
-      ) &&
-      (!location.hash || config.allowedFragments?.includes(location.hash.slice(1))) &&
-      (!document.referrer ||
-        (!new URL(document.referrer).search &&
-          !new URL(document.referrer).hash));
+    const safeVendorUrl = (value, marketing) => {
+      if (!value) return true;
+      const url = new URL(value);
+      const safeQuery = [...url.searchParams].every(([key, value]) =>
+        (/^utm_(source|medium|campaign|content|term)$/.test(key) &&
+          /^[a-z][a-z0-9_-]{0,79}$/.test(value) && !/\d{7}/.test(value)) ||
+        (marketing && key === "fbclid" && /^[A-Za-z0-9_-]{1,512}$/.test(value))
+      );
+      return /^https?:$/.test(url.protocol) && safeQuery &&
+        (!url.hash || config.allowedFragments?.includes(url.hash.slice(1)));
+    };
+    const safeDocumentUrl = safeVendorUrl(location.href, true) && safeVendorUrl(document.referrer, true);
+    const safeMetricoolUrl = safeVendorUrl(location.href, false) && safeVendorUrl(document.referrer, false);
     if (
       allowed("marketing") &&
       safeDocumentUrl &&
@@ -150,7 +155,7 @@
     }
     if (
       allowed("analytics") &&
-      safeDocumentUrl &&
+      safeMetricoolUrl &&
       /^[a-f0-9]{32}$/i.test(config.metricoolHash) &&
       !loaded.has("metricool") &&
       !window.beTracker &&

@@ -8,8 +8,15 @@
   "privacyNoticeUrl": "",
   "ga4MeasurementId": "G-1WEVH2BDTJ",
   "metaPixelId": "",
-  "metricoolHash": "",
+  "metricoolHash": "46026cbfb05c35eaff5c4900bcd965bb",
   "formTypes": [],
   "contentRoutes": {},
-  "linkEvents": {}
+  "linkEvents": {
+    "family_reunion_2026": {
+      "event_slug": "family-reunion-2026",
+      "event_title": "Family Reunion 2026 (historical)",
+      "link_type": "registration_navigation"
+    }
+  },
+  "metricoolBrandId": 7369612
 }

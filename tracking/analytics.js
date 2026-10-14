@@ -198,7 +198,7 @@
   }
   function emit(name, params = {}, unique = "") {
     if (
-      !/^(ticket_button_click|registration_button_click|vip_dinner_click|schedule_button_click|event_details_click|generate_lead|begin_checkout)$/.test(
+      !/^(ticket_button_click|payment_link_click|registration_button_click|vip_dinner_click|schedule_button_click|event_details_click|generate_lead|begin_checkout)$/.test(
         name,
       )
     )
@@ -221,6 +221,7 @@
         }[name];
         const custom = {
           ticket_button_click: "TicketButtonClick",
+          payment_link_click: "PaymentLinkClick",
           registration_button_click: "RegistrationButtonClick",
           vip_dinner_click: "VipDinnerClick",
           schedule_button_click: "ScheduleButtonClick",
@@ -418,6 +419,7 @@
       const validSaved =
         saved &&
         Number.isFinite(saved.time) &&
+        saved.time <= Date.now() &&
         Date.now() - saved.time < 180 * 86400000;
       if (validSaved)
         consent = {

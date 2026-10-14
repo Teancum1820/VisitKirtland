@@ -41,7 +41,7 @@ async function setup(overrides = {}, options = {}) {
       "khg-tracking-consent-v1",
       JSON.stringify({
         ...options.saved,
-        time: options.expired ? 0 : Date.now(),
+        time: options.future ? Date.now() + 86400000 : options.expired ? 0 : Date.now(),
       }),
     );
   const el = (tag) => ({
@@ -338,4 +338,55 @@ test("broken analytics dispatch never throws or cancels navigation", async () =>
   assert.doesNotThrow(() =>
     a.fire("khg:form-success", { form_type: "contact", submission_key: "x" }),
   );
+});
+
+test("future-dated consent fails closed", async () => {
+  const a = await setup({}, {saved: {analytics:true,marketing:true}, future:true});
+  assert.equal(a.nodes.filter(n => n.tag === "script").length, 0);
+});
+test("invalid Metricool hash cannot load a tag or use a brand ID as a hash", async () => {
+  for (const hash of ["4510a3f600e674fbd59fa0193b69fe3", "6874036", "", "x".repeat(32)]) {
+    const a = await setup({metricoolHash:hash}, {saved:{analytics:true}});
+    assert.equal(a.document.getElementById("khg-metricool"), undefined);
+  }
+});
+test("Metricool receives the configured hash once after analytics consent", async () => {
+  const hash = "1a629a9567d67d551e83d8c4e0081e3d";
+  const a = await setup({metricoolHash:hash});
+  const received = [];
+  a.window.beTracker = {t: p => received.push(p)};
+  a.window.KHGAnalytics.setConsent({analytics:true});
+  // A pre-existing vendor owner must be preserved, so use a fresh fixture.
+  assert.equal(a.document.getElementById("khg-metricool"), undefined);
+  const b = await setup({metricoolHash:hash}, {saved:{analytics:true}});
+  b.window.beTracker = {t:p => received.push(p)};
+  b.document.getElementById("khg-metricool").onload();
+  b.window.KHGAnalytics.setConsent({analytics:true});
+  assert.equal(received.length, 1);
+  assert.equal(received[0].hash, hash);
+});
+test("payment link intent stays separate from checkout and purchase", async () => {
+  const a = await setup({}, {saved:{analytics:true,marketing:true}});
+  a.window.KHGAnalytics.track("payment_link_click", {ticket_provider:"stripe",destination_url:"https://buy.stripe.com/example"});
+  const events = a.commands().filter(c=>c[0] === "event");
+  assert.equal(events.length, 1);
+  assert.equal(events[0][1], "payment_link_click");
+  assert.equal(a.window.fbq.queue.filter(c=>c[1] === "Purchase" || c[1] === "InitiateCheckout").length, 0);
+});
+
+test("release config has exact authorized mapping and stays dormant", () => {
+  const config = JSON.parse(fs.readFileSync(__dirname + "/../tracking/analytics-config.json", "utf8"));
+  const expected = {"enabled": false, "allowLocalTesting": false, "allowedHosts": ["visitkirtland.com", "www.visitkirtland.com"], "ga4MeasurementId": "G-1WEVH2BDTJ", "metaPixelId": "", "metricoolBrandId": 7369612, "metricoolHash": "46026cbfb05c35eaff5c4900bcd965bb"};
+  for (const [key,value] of Object.entries(expected)) assert.deepEqual(config[key],value,key);
+});
+test("missing provider IDs remain safe after consent", async () => {
+  const a = await setup({ga4MeasurementId:"",metaPixelId:"",metricoolHash:""}, {saved:{analytics:true,marketing:true}});
+  assert.equal(a.nodes.filter(n=>n.tag === "script").length,0);
+  a.click();
+  assert.equal(a.commands().filter(c=>c[0] === "event").length,0);
+});
+
+test("checked-in Visit deployment assets match their canonical tracking source", () => {
+  for (const name of ["analytics.js","analytics-config.json"])
+    assert.equal(fs.readFileSync(__dirname+"/../tracking/"+name,"utf8"),fs.readFileSync(__dirname+"/../site/tracking/"+name,"utf8"));
 });

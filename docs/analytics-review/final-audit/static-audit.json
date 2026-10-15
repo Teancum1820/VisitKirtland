@@ -1,0 +1,44 @@
+{
+  "site": "visit",
+  "historyRange": "7e827e0812da7b59fecdd2c50835231434c7d72d..HEAD",
+  "historyBlobsScanned": 61,
+  "credentialPatternFindings": [],
+  "releaseConfig": {
+    "enabled": false,
+    "allowedHosts": [
+      "visitkirtland.com",
+      "www.visitkirtland.com"
+    ],
+    "allowLocalTesting": false,
+    "privacyNoticeUrl": "/privacy/",
+    "ga4MeasurementId": "G-1WEVH2BDTJ",
+    "metaPixelId": "",
+    "metricoolHash": "46026cbfb05c35eaff5c4900bcd965bb",
+    "formTypes": [],
+    "contentRoutes": {},
+    "linkEvents": {
+      "family_reunion_2026": {
+        "event_slug": "family-reunion-2026",
+        "event_title": "Family Reunion 2026 (historical)",
+        "link_type": "registration_navigation"
+      }
+    },
+    "metricoolBrandId": 7369612,
+    "metricoolVerificationStatus": "UNVERIFIED",
+    "ga4VerificationStatus": "VERIFIED",
+    "metaPixelVerificationStatus": "UNAVAILABLE"
+  },
+  "buildHoldStopsBeforeUpload": null,
+  "productionHttpOnlyNoScriptsExecuted": {
+    "/": {
+      "status": 200,
+      "url": "https://visitkirtland.com/",
+      "sha256": "a4a79ebecf37dd5de06c321288ca6f98eb8c8da805223ff51a1330b0cfba3b53",
+      "sharedTrackingReference": false,
+      "providerScriptReferences": []
+    },
+    "/tracking/analytics-config.json": {
+      "error": "HTTP Error 404: Not Found"
+    }
+  }
+}

@@ -1,0 +1,289 @@
+[
+  {
+    "site": "visit",
+    "mode": "cross-tab-local-storage-clear",
+    "result": "PASS",
+    "real_storage_event": true
+  },
+  {
+    "site": "visit",
+    "mode": "exact-disabled",
+    "viewport": "desktop",
+    "pages": [
+      {
+        "route": "/",
+        "title": "Visit Kirtland Ohio | Faith, History, Nature & Heritage Days",
+        "overflow": false,
+        "annotatedLinks": 0
+      },
+      {
+        "route": "/church-history-locations/",
+        "title": "Church History Locations in Kirtland, Ohio | Visit Kirtland",
+        "overflow": false,
+        "annotatedLinks": 0
+      },
+      {
+        "route": "/2026-family-reunions/",
+        "title": "Visit Kirtland Ohio",
+        "overflow": false,
+        "annotatedLinks": 0
+      },
+      {
+        "route": "/family-reunion/millet-reunion/",
+        "title": "Visit Kirtland Ohio",
+        "overflow": false,
+        "annotatedLinks": 2
+      },
+      {
+        "route": "/family-reunion/harris-reunion/",
+        "title": "Visit Kirtland Ohio",
+        "overflow": false,
+        "annotatedLinks": 2
+      },
+      {
+        "route": "/privacy/",
+        "title": "Visit Kirtland — draft privacy notice",
+        "overflow": false,
+        "annotatedLinks": 0
+      }
+    ],
+    "vendor_requests": 0,
+    "errors": []
+  },
+  {
+    "site": "visit",
+    "mode": "exact-disabled",
+    "viewport": "mobile",
+    "pages": [
+      {
+        "route": "/",
+        "title": "Visit Kirtland Ohio | Faith, History, Nature & Heritage Days",
+        "overflow": false,
+        "annotatedLinks": 0
+      },
+      {
+        "route": "/church-history-locations/",
+        "title": "Church History Locations in Kirtland, Ohio | Visit Kirtland",
+        "overflow": false,
+        "annotatedLinks": 0
+      },
+      {
+        "route": "/2026-family-reunions/",
+        "title": "Visit Kirtland Ohio",
+        "overflow": false,
+        "annotatedLinks": 0
+      },
+      {
+        "route": "/family-reunion/millet-reunion/",
+        "title": "Visit Kirtland Ohio",
+        "overflow": false,
+        "annotatedLinks": 2
+      },
+      {
+        "route": "/family-reunion/harris-reunion/",
+        "title": "Visit Kirtland Ohio",
+        "overflow": false,
+        "annotatedLinks": 2
+      },
+      {
+        "route": "/privacy/",
+        "title": "Visit Kirtland — draft privacy notice",
+        "overflow": false,
+        "annotatedLinks": 0
+      }
+    ],
+    "vendor_requests": 0,
+    "errors": []
+  },
+  {
+    "site": "visit",
+    "mode": "synthetic-consent",
+    "before_consent": 0,
+    "denied": 0,
+    "persistence": "passed",
+    "analytics_only": "passed",
+    "marketing_opt_in": "passed",
+    "withdrawal": "passed",
+    "metricool_hash": "46026cbfb05c35eaff5c4900bcd965bb",
+    "metricool_dispatch": "correct hash",
+    "events": [
+      {
+        "provider": "metricool",
+        "args": [
+          {
+            "hash": "46026cbfb05c35eaff5c4900bcd965bb"
+          }
+        ]
+      },
+      {
+        "provider": "ga4",
+        "args": [
+          "consent",
+          "default",
+          {
+            "analytics_storage": "denied",
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied"
+          }
+        ]
+      },
+      {
+        "provider": "ga4",
+        "args": [
+          "consent",
+          "update",
+          {
+            "analytics_storage": "granted"
+          }
+        ]
+      },
+      {
+        "provider": "ga4",
+        "args": [
+          "js",
+          "2026-10-15T22:28:34.901Z"
+        ]
+      },
+      {
+        "provider": "ga4",
+        "args": [
+          "config",
+          "G-TEST12345",
+          {
+            "send_page_view": true,
+            "page_location": "http://127.0.0.1:49949/",
+            "page_referrer": "http://127.0.0.1:49949/",
+            "allow_google_signals": false,
+            "allow_ad_personalization_signals": false
+          }
+        ]
+      },
+      {
+        "provider": "meta",
+        "args": [
+          "set",
+          "autoConfig",
+          false,
+          "123456789012345"
+        ]
+      },
+      {
+        "provider": "meta",
+        "args": [
+          "consent",
+          "grant"
+        ]
+      },
+      {
+        "provider": "meta",
+        "args": [
+          "init",
+          "123456789012345"
+        ]
+      },
+      {
+        "provider": "meta",
+        "args": [
+          "track",
+          "PageView"
+        ]
+      },
+      {
+        "provider": "ga4",
+        "args": [
+          "consent",
+          "update",
+          {
+            "analytics_storage": "denied",
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied"
+          }
+        ]
+      },
+      {
+        "provider": "meta",
+        "args": [
+          "consent",
+          "revoke"
+        ]
+      }
+    ],
+    "errors": []
+  },
+  {
+    "site": "visit",
+    "mode": "synthetic-cta",
+    "viewport": 1440,
+    "visible_buttons_tested": 4,
+    "buttons": [
+      {
+        "href": "http://127.0.0.1:49949/family-reunion/2026-registration/",
+        "key": "family_reunion_2026",
+        "event": "registration_button_click",
+        "button": "_family_reunion_millet_reunion_index_html_family_registration_1",
+        "route": "/family-reunion/millet-reunion/"
+      },
+      {
+        "href": "http://127.0.0.1:49949/family-reunion/2026-registration/",
+        "key": "family_reunion_2026",
+        "event": "registration_button_click",
+        "button": "_family_reunion_millet_reunion_index_html_family_registration_2",
+        "route": "/family-reunion/millet-reunion/"
+      },
+      {
+        "href": "http://127.0.0.1:49949/family-reunion/2026-registration/",
+        "key": "family_reunion_2026",
+        "event": "registration_button_click",
+        "button": "_family_reunion_harris_reunion_index_html_family_registration_1",
+        "route": "/family-reunion/harris-reunion/"
+      },
+      {
+        "href": "http://127.0.0.1:49949/family-reunion/2026-registration/",
+        "key": "family_reunion_2026",
+        "event": "registration_button_click",
+        "button": "_family_reunion_harris_reunion_index_html_family_registration_2",
+        "route": "/family-reunion/harris-reunion/"
+      }
+    ],
+    "errors": []
+  },
+  {
+    "site": "visit",
+    "mode": "synthetic-cta",
+    "viewport": 390,
+    "visible_buttons_tested": 4,
+    "buttons": [
+      {
+        "href": "http://127.0.0.1:49949/family-reunion/2026-registration/",
+        "key": "family_reunion_2026",
+        "event": "registration_button_click",
+        "button": "_family_reunion_millet_reunion_index_html_family_registration_1",
+        "route": "/family-reunion/millet-reunion/"
+      },
+      {
+        "href": "http://127.0.0.1:49949/family-reunion/2026-registration/",
+        "key": "family_reunion_2026",
+        "event": "registration_button_click",
+        "button": "_family_reunion_millet_reunion_index_html_family_registration_2",
+        "route": "/family-reunion/millet-reunion/"
+      },
+      {
+        "href": "http://127.0.0.1:49949/family-reunion/2026-registration/",
+        "key": "family_reunion_2026",
+        "event": "registration_button_click",
+        "button": "_family_reunion_harris_reunion_index_html_family_registration_1",
+        "route": "/family-reunion/harris-reunion/"
+      },
+      {
+        "href": "http://127.0.0.1:49949/family-reunion/2026-registration/",
+        "key": "family_reunion_2026",
+        "event": "registration_button_click",
+        "button": "_family_reunion_harris_reunion_index_html_family_registration_2",
+        "route": "/family-reunion/harris-reunion/"
+      }
+    ],
+    "errors": []
+  }
+]

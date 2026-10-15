@@ -1,0 +1,48 @@
+Commit: 2f3c10597161299d74e2f7fa8b81b54e7d8680ce
+Command: node --test scripts/analytics.runtime.cjs
+UTC start: 2026-10-15T22:28:08.576027+00:00
+✔ no provider scripts or events before consent, no retroactive clicks (21.4709ms)
+✔ one GA initialization, one Meta PageView, no duplicate listeners (3.058ms)
+✔ only analytics consent loads GA/Metricool, no Meta (1.7954ms)
+✔ one custom click and correct parameters without purchase semantics (3.0878ms)
+✔ only configured acknowledged form success, local per-record deduplication (2.336ms)
+✔ clicks and forged purchase name cannot create a purchase (1.6571ms)
+✔ manual outbound fallback is explicit, sanitized, and does not add a Meta conversion (1.9407ms)
+✔ disabled config, missing privacy, blocked fetch fail closed (3.2443ms)
+✔ unapproved host, private routes, GPC, DNT prevent all new providers (4.2878ms)
+✔ sensitive document query suppresses URL-reading vendors and sanitizes GA (8.5595ms)
+✔ existing GTM/pixel is not double initialized (2.098ms)
+✔ known public schedule anchors initialize vendors while unknown fragments remain suppressed (3.4922ms)
+✔ URL-reading vendors do not receive sensitive referrer queries (7.1355ms)
+✔ campaign referrers and consented Meta click attribution survive while Metricool does not receive fbclid (1.5031ms)
+✔ withdrawal applies denial and reloads to stop automatic vendor events (5.0778ms)
+✔ expired consent requests new choice, no provider initializes (2.456ms)
+✔ broken analytics dispatch never throws or cancels navigation (1.8717ms)
+✔ future-dated consent fails closed (1.2689ms)
+✔ invalid Metricool hash cannot load a tag or use a brand ID as a hash (5.4549ms)
+✔ Metricool receives the configured hash once after analytics consent (3.1642ms)
+✔ payment link intent stays separate from checkout and purchase (1.4494ms)
+✔ release config has exact authorized mapping and stays dormant (1.0271ms)
+✔ missing provider IDs remain safe after consent (1.5521ms)
+✔ checked-in Visit deployment assets match their canonical tracking source (114.2511ms)
+✔ Metricool rejects whitespace, encoding tricks, wrong types and script injection (15.8802ms)
+✔ all three syntactically valid reported brand hashes work only in a synthetic fixture (5.1037ms)
+✔ disabled feature stays inert even after acceptance and acknowledged success (1.6068ms)
+✔ declined consent survives another page load without a new prompt (3.0278ms)
+✔ corrupted consent shapes fail closed (6.6317ms)
+✔ unsafe notice paths cannot activate providers or create unsafe links (19.4975ms)
+✔ provider IDs reject coercible arrays and malformed identifiers (3.8459ms)
+✔ withdrawal blocks future custom events and delayed Metricool initialization (3.7929ms)
+✔ storage quota failure removes the previous grant before withdrawal reload (1.5894ms)
+✔ missing configuration document remains inert after user actions (5.6844ms)
+✔ clearing local storage in another tab revokes collection before reloading (2.2214ms)
+✔ consent removal in another tab revokes without rewriting its preference (1.844ms)
+✔ unrelated local or session storage changes do not reload consent (1.7567ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 37
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 479.5783

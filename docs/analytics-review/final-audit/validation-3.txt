@@ -1,0 +1,21 @@
+Commit: 2f3c10597161299d74e2f7fa8b81b54e7d8680ce
+Command: git diff --exit-code -- site
+UTC start: 2026-10-15T22:28:10.735623+00:00
+warning: in the working copy of 'site/2026-family-reunions/app/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/2026-family-reunions/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/404.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/church-history-locations/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/family-reunion/harris-reunion/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/family-reunion/millet-reunion/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/family-reunion/millett-reunion/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/home/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/kirtland-heritage-days/2024-kirtland-heritage-days/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/kirtland-heritage-days/2025-kirtland-heritage-days/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/kirtland-heritage-days/2026-kirtland-heritage-days/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/kirtland-heritage-days/2027-kirtland-heritage-days/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/local-houses-of-worship/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/lodging/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/privacy/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/restaurants/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'site/things-to-do-near-cleveland/index.html', LF will be replaced by CRLF the next time Git touches it

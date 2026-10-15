@@ -19,5 +19,7 @@
     }
   },
   "metricoolBrandId": 7369612,
-  "metricoolVerificationStatus": "UNVERIFIED"
+  "metricoolVerificationStatus": "UNVERIFIED",
+  "ga4VerificationStatus": "VERIFIED",
+  "metaPixelVerificationStatus": "UNAVAILABLE"
 }

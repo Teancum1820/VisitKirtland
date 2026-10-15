@@ -1,0 +1,20 @@
+[
+  {
+    "exit": 0,
+    "sha": "ffadea1060b9124759415b9c0112d9ebbc5f6525",
+    "log": "../Analytics_Review_2026-10-15/visit/final-check-1.log",
+    "command": "node --test scripts/analytics.runtime.cjs"
+  },
+  {
+    "exit": 0,
+    "sha": "ffadea1060b9124759415b9c0112d9ebbc5f6525",
+    "log": "../Analytics_Review_2026-10-15/visit/final-check-2.log",
+    "command": "pwsh -NoProfile -File tools/add-tracking.ps1"
+  },
+  {
+    "exit": 0,
+    "sha": "ffadea1060b9124759415b9c0112d9ebbc5f6525",
+    "log": "../Analytics_Review_2026-10-15/visit/final-check-3.log",
+    "command": "git diff --exit-code"
+  }
+]

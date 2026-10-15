@@ -1,0 +1,35 @@
+# Analytics account verification — October 15, 2026
+
+VERIFIED identifies an authenticated account/stream observation; it does not assert installed tracking, received events, legal ownership, or activation approval. REPORTED_NOT_VERIFIED identifies historical or supplied information. UNAVAILABLE means no verified identifier was available; it does not prove that an account does not exist. MISMATCH_REQUIRES_REVIEW identifies a conflicting setting or mapping. All four release configurations remain disabled.
+
+| Website | Vendor | Property / dataset identifier | Verification status | Source | Associated domain | Verified access manager | Missing access / follow-up |
+|---|---|---|---|---|---|---|---|
+| KHG | GA4 | Unavailable; config blank | UNAVAILABLE | Repository + accessible-account audit | kirtlandheritagegroup.com intended; no stream verified | Unavailable | Owner supplies existing property and stream read access or account-generated evidence; do not create one |
+| KHG | Meta | Unavailable; config blank | UNAVAILABLE | Repository; Events Manager login barrier | kirtlandheritagegroup.com intended | Unavailable | Existing business/dataset access and domain assignment evidence |
+| KHG | Metricool | Brand 6874036; 4510a3f600e674fbd59fa0193b69fe3 | REPORTED_NOT_VERIFIED | Supplied assignment, exact repository value; account login failed | Intended KHG domain; account association unverified | Unavailable | Generated JavaScript snippet for this exact brand; keep UNVERIFIED |
+| Visit Kirtland | GA4 | Account 304466125; property 429877224; stream 7589806609; G-1WEVH2BDTJ | VERIFIED | Authenticated GA4 stream and property-access screens [1] | https://www.visitkirtland.com | calebday1820@gmail.com and restorationtourgroup@gmail.com observed as Administrators | No stream-read gap; confirm designated organizational owner and Joe's intended login |
+| Visit Kirtland | Meta | Unavailable; config blank | UNAVAILABLE | Repository; Events Manager login barrier | visitkirtland.com intended | Unavailable | Existing dataset ID, business owner and domain mapping |
+| Visit Kirtland | Metricool | Brand 7369612; 46026cbfb05c35eaff5c4900bcd965bb | REPORTED_NOT_VERIFIED | Assignment and repository; syntax only | Intended Visit domain; account association unverified | Unavailable | Exact generated tag and authorized brand access |
+| RTG | GA4 | Account 339288184; property 470675606; stream 10067062217; G-FWRDG3GXS4 | VERIFIED | Authenticated GA4 stream and access screens [2] | https://restorationtourgroup.com | restorationtourgroup@gmail.com observed as Administrator | No stream-read gap; review automatic measurement and advertising linkage before activation |
+| RTG | Meta | Unavailable; config blank | UNAVAILABLE | Repository; Events Manager login barrier; legacy endpoint returns null | restorationtourgroup.com intended | Unavailable | Existing business/dataset/domain access; legacy META_PIXEL_ID cannot bypass consent |
+| RTG | Metricool | Brand 7369575; 186b8b755be1269fee75993c4c64b16d | REPORTED_NOT_VERIFIED | Assignment and repository; syntax only | Intended RTG domain; account association unverified | Unavailable | Exact generated tag and authorized brand access |
+| NEOChosen | GA4 | Unavailable; config blank | UNAVAILABLE | Repository + accessible-account audit | neochosen.com intended; no stream verified | Unavailable | Owner supplies existing property/stream evidence; do not create one |
+| NEOChosen | Meta | Unavailable; config blank | UNAVAILABLE | Repository; Events Manager login barrier | neochosen.com intended | Unavailable | Existing business/dataset/domain evidence |
+| NEOChosen | Metricool | Brand 7369579; 1a629a9567d67d551e83d8c4e0081e3d | REPORTED_NOT_VERIFIED | Assignment and repository; syntax only | Intended NEO domain; account association unverified | Unavailable | Exact generated tag and authorized brand access |
+
+[1] [Visit stream](https://analytics.google.com/analytics/web/#/a304466125p429877224/admin/streams/table/7589806609). Property label VisitKirtlandOhio.com is historical naming; the authenticated stream explicitly maps to www.visitkirtland.com. No current domain mismatch was found. The property-access table showed four Administrators; only the two relevant handoff identities above are reproduced here. An administrator role is access evidence, not legal ownership certification.
+
+[2] [RTG stream](https://analytics.google.com/analytics/web/?authuser=7#/a339288184p470675606/admin/streams/table/10067062217). Both inspected streams show no recent received data and zero connected site tags. Enhanced measurement, including outbound clicks, is enabled on both. Email redaction is active; URL-query-key redaction is inactive. The RTG enabled setting differs from the October 13 handoff: MISMATCH_REQUIRES_REVIEW for that historical setting, corrected in code by setting manualOutboundClicks=false. No account setting was changed.
+
+[RTG Google Ads links](https://analytics.google.com/analytics/web/?authuser=7#/a339288184p470675606/admin/integrations/google-ads) independently confirms a Completed link to 700-678-6868, personalized advertising Enabled, linked December 20, 2024 by restorationtourgroup@gmail.com. This establishes the link visible in GA4, not ownership or permission to change the Ads account. Advertising uses, automatic form measurements and redaction require owner review. Runtime Google Signals and ad-personalization signals remain disabled.
+
+The existing primary Google sign-in to Metricool returned user_not_found. No brand snippets were obtainable. Meta Events Manager redirected to business login. No accounts, Pixels, new permissions, API secrets, or production events were created. Machine-readable observations: [account observations](ACCOUNT_OBSERVATIONS.json).
+
+## Access request checklist for Joe
+
+- Supply read access or account-generated evidence for the existing KHG and NEOChosen GA4 properties, web streams, intended domains and designated administrators. Supply unavailable information as unavailable; do not create replacements.
+- Confirm Joe's intended GA4 identity and the organizational owner for the existing Visit and RTG properties; existing administrator access above need not be recreated.
+- Provide the correct existing Metricool login or authorized brand access for all four brand IDs, then copy each account-generated JavaScript snippet verbatim. Confirm KHG's 31-character discrepancy with Metricool if the generated tag matches it. Do not click connection verification or activate tags during this review.
+- Provide access to existing Meta business datasets/Pixels, their IDs, business owner and domain assignments. Keep unknown IDs blank. Do not create or reuse another site's Pixel.
+- Approve site-specific draft wording, privacy contact/retention details, automatic measurement choices and RTG's existing Ads linkage before any activation.
+- Use normal account invitations and approved access management. Never send passwords, authentication tokens, API secrets or private keys in email, PRs or screenshots.

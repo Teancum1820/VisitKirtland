@@ -31,18 +31,11 @@
   // Notice links must stay on this site; never accept script or external URLs.
   const noticeUrl = () => {
     const value = config?.privacyNoticeUrl;
-    if (
-      typeof value !== "string" ||
-      !/^\/(?!\/)/.test(value) ||
-      /[\\\s]/.test(value)
-    )
-      return "";
-    return (
-      safe(() => {
-        const u = new URL(value, location.href);
-        return u.origin === new URL(location.href).origin ? u.href : "";
-      }) || ""
-    );
+    if (typeof value !== "string" || !/^\/(?!\/)/.test(value) || /[\\\s]/.test(value)) return "";
+    return safe(() => {
+      const u = new URL(value, location.href);
+      return u.origin === new URL(location.href).origin ? u.href : "";
+    }) || "";
   };
   const utms = () => {
     const result = {};
@@ -267,10 +260,7 @@
   }
   function persistConsent() {
     try {
-      localStorage.setItem(
-        consentKey,
-        JSON.stringify({ ...consent, time: Date.now() }),
-      );
+      localStorage.setItem(consentKey, JSON.stringify({ ...consent, time: Date.now() }));
     } catch {
       // A quota failure must not leave an older grant to restart after withdrawal.
       safe(() => localStorage.removeItem(consentKey));
@@ -482,8 +472,7 @@
         };
       if (privacySignal()) consent = { analytics: false, marketing: false };
       initialize();
-      if (!validSaved && config.enabled === true && !privacySignal())
-        preferences();
+      if (!validSaved && config.enabled === true && !privacySignal()) preferences();
       const notice = document.createElement("a");
       notice.href = noticeUrl();
       notice.textContent = "Privacy notice";

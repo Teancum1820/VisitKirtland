@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-15",
+  "method": "Read-only authenticated Opera UI inspection; no analytics or Cloudflare account settings changed",
+  "visit": {
+    "account": "304466125",
+    "accountName": "Visit Kirtland Ohio",
+    "property": "429877224",
+    "propertyName": "VisitKirtlandOhio.com",
+    "stream": "7589806609",
+    "domain": "https://www.visitkirtland.com",
+    "measurementId": "G-1WEVH2BDTJ",
+    "status": "VERIFIED",
+    "observedAdministratorsRelevantToHandoff": ["calebday1820@gmail.com", "restorationtourgroup@gmail.com"],
+    "additionalAdministratorEntriesObserved": 2,
+    "enhancedMeasurement": "enabled, including outbound clicks and additional automatic measurements",
+    "redaction": "Email active; URL query parameter keys inactive",
+    "connectedTags": 0,
+    "collectionStatus": "No data received in past 48 hours; collection is not active",
+    "source": "https://analytics.google.com/analytics/web/#/a304466125p429877224/admin/streams/table/7589806609"
+  },
+  "rtg": {
+    "account": "339288184",
+    "property": "470675606",
+    "propertyName": "RestorationTourGroup.com",
+    "stream": "10067062217",
+    "domain": "https://restorationtourgroup.com",
+    "measurementId": "G-FWRDG3GXS4",
+    "status": "VERIFIED",
+    "observedAdministrator": "restorationtourgroup@gmail.com",
+    "enhancedMeasurement": "enabled, including outbound clicks; differs from the October 13 handoff",
+    "redaction": "Email active; URL query parameter keys inactive",
+    "connectedTags": 0,
+    "collectionStatus": "No data received in past 48 hours; collection is not active",
+    "source": "https://analytics.google.com/analytics/web/?authuser=7#/a339288184p470675606/admin/streams/table/10067062217",
+    "googleAds": {"account": "700-678-6868", "status": "Completed", "personalizedAdvertising": "Enabled", "linked": "2024-12-20", "linkedBy": "restorationtourgroup@gmail.com", "source": "https://analytics.google.com/analytics/web/?authuser=7#/a339288184p470675606/admin/integrations/google-ads"}
+  },
+  "khgGa4": "UNAVAILABLE: no verified measurement ID, stream, or administrator established through accessible sources",
+  "neoGa4": "UNAVAILABLE: no verified measurement ID, stream, or administrator established through accessible sources",
+  "metricool": "All four tags UNVERIFIED. Existing Google sign-in for the current primary identity returned user_not_found. No other account identities were guessed or created. Public vendor documentation does not establish the account-generated hash or permitted hash length.",
+  "meta": "All four Pixel IDs UNAVAILABLE. Events Manager redirected to business login. No verified dataset ownership or current authenticated business session was available.",
+  "cloudflare": {"projects": ["kirtland-heritage-group", "restorationtourgroup", "neochosen"], "productionBranch": "main", "nonproductionBuilds": true, "build": "npm run build", "deploy": "npx wrangler deploy", "version": "npx wrangler versions upload", "watch": "*", "buildVariablesOrSecrets": "none configured", "settingsChanged": false},
+  "providerReceiptVerified": false
+}

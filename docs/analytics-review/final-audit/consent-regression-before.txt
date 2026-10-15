@@ -1,0 +1,100 @@
+✔ no provider scripts or events before consent, no retroactive clicks (10.2227ms)
+✔ one GA initialization, one Meta PageView, no duplicate listeners (2.113ms)
+✔ only analytics consent loads GA/Metricool, no Meta (1.4764ms)
+✔ one custom click and correct parameters without purchase semantics (2.4385ms)
+✔ only configured acknowledged form success, local per-record deduplication (1.5934ms)
+✔ clicks and forged purchase name cannot create a purchase (1.1147ms)
+✔ manual outbound fallback is explicit, sanitized, and does not add a Meta conversion (1.3696ms)
+✔ disabled config, missing privacy, blocked fetch fail closed (3.0684ms)
+✔ unapproved host, private routes, GPC, DNT prevent all new providers (4.6663ms)
+✔ sensitive document query suppresses URL-reading vendors and sanitizes GA (1.578ms)
+✔ existing GTM/pixel is not double initialized (1.2085ms)
+✔ known public schedule anchors initialize vendors while unknown fragments remain suppressed (1.8996ms)
+✔ URL-reading vendors do not receive sensitive referrer queries (1.1266ms)
+✔ campaign referrers and consented Meta click attribution survive while Metricool does not receive fbclid (1.1709ms)
+✔ withdrawal applies denial and reloads to stop automatic vendor events (1.3546ms)
+✔ expired consent requests new choice, no provider initializes (1.316ms)
+✔ broken analytics dispatch never throws or cancels navigation (1.7992ms)
+✔ future-dated consent fails closed (1.2299ms)
+✔ invalid Metricool hash cannot load a tag or use a brand ID as a hash (4.6604ms)
+✔ Metricool receives the configured hash once after analytics consent (2.2933ms)
+✔ payment link intent stays separate from checkout and purchase (1.2585ms)
+✔ release config has exact authorized mapping and stays dormant (1.0162ms)
+✔ missing provider IDs remain safe after consent (1.3221ms)
+✔ checked-in Visit deployment assets match their canonical tracking source (18.2186ms)
+✔ Metricool rejects whitespace, encoding tricks, wrong types and script injection (12.3405ms)
+✔ all three syntactically valid reported brand hashes work only in a synthetic fixture (4.144ms)
+✔ disabled feature stays inert even after acceptance and acknowledged success (1.5695ms)
+✔ declined consent survives another page load without a new prompt (1.9469ms)
+✔ corrupted consent shapes fail closed (4.3895ms)
+✔ unsafe notice paths cannot activate providers or create unsafe links (6.863ms)
+✔ provider IDs reject coercible arrays and malformed identifiers (4.2774ms)
+✔ withdrawal blocks future custom events and delayed Metricool initialization (2.1796ms)
+✔ storage quota failure removes the previous grant before withdrawal reload (1.1414ms)
+✔ missing configuration document remains inert after user actions (0.7786ms)
+✖ clearing local storage in another tab revokes collection before reloading (1.7218ms)
+✖ consent removal in another tab revokes without rewriting its preference (1.8544ms)
+✖ unrelated local or session storage changes do not reload consent (1.5393ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 34
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 206.4341
+
+✖ failing tests:
+
+test at scripts\analytics.runtime.cjs:472:1
+✖ clearing local storage in another tab revokes collection before reloading (1.7218ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (C:\Users\caleb\OneDrive\Documents\New project\analytics-visit\scripts\analytics.runtime.cjs:477:10)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\analytics.runtime.cjs:486:1
+✖ consent removal in another tab revokes without rewriting its preference (1.8544ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'denied'
+  
+      at TestContext.<anonymous> (C:\Users\caleb\OneDrive\Documents\New project\analytics-visit\scripts\analytics.runtime.cjs:494:10)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'denied',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\analytics.runtime.cjs:498:1
+✖ unrelated local or session storage changes do not reload consent (1.5393ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (C:\Users\caleb\OneDrive\Documents\New project\analytics-visit\scripts\analytics.runtime.cjs:504:10)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

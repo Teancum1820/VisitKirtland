@@ -771,5 +771,6 @@ $sitemap = "<?xml version=`"1.0`" encoding=`"UTF-8`"?>`n<urlset xmlns=`"http://w
 [IO.File]::WriteAllText((Join-Path $sitePath 'sitemap.xml'), $sitemap, $utf8)
 
 & (Join-Path $PSScriptRoot 'add-web-analytics.ps1')
+& (Join-Path $PSScriptRoot 'add-tracking.ps1')
 
 Write-Output "Built Visit Kirtland site at $sitePath"

@@ -1,0 +1,3 @@
+Command: pwsh -NoProfile -File tools/add-tracking.ps1
+Commit: ffadea1060b9124759415b9c0112d9ebbc5f6525
+Exit: 0

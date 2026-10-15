@@ -1,0 +1,25 @@
+{
+  "enabled": false,
+  "allowedHosts": [
+    "visitkirtland.com",
+    "www.visitkirtland.com"
+  ],
+  "allowLocalTesting": false,
+  "privacyNoticeUrl": "/privacy/",
+  "ga4MeasurementId": "G-1WEVH2BDTJ",
+  "metaPixelId": "",
+  "metricoolHash": "46026cbfb05c35eaff5c4900bcd965bb",
+  "formTypes": [],
+  "contentRoutes": {},
+  "linkEvents": {
+    "family_reunion_2026": {
+      "event_slug": "family-reunion-2026",
+      "event_title": "Family Reunion 2026 (historical)",
+      "link_type": "registration_navigation"
+    }
+  },
+  "metricoolBrandId": 7369612,
+  "metricoolVerificationStatus": "UNVERIFIED",
+  "ga4VerificationStatus": "VERIFIED",
+  "metaPixelVerificationStatus": "UNAVAILABLE"
+}

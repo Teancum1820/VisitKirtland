@@ -236,6 +236,8 @@ try {
         assert.equal(a.requests.length, 0, "disabled config vendor requests");
         assert.equal(await a.page.locator("#khg-consent").count(), 0);
         if (route.includes("/privacy/")) {
+          assert.equal(await a.page.locator("main").count(),1,"One main landmark on draft notice");
+          assert.equal(await a.page.evaluate(()=>{const ids=[...document.querySelectorAll("[id]")].map(el=>el.id);return new Set(ids).size===ids.length;}),true,"Unique notice IDs");
           assert.equal(
             await a.page.evaluate(
               () => document.documentElement.scrollWidth > innerWidth + 2,

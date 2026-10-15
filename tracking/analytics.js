@@ -31,11 +31,18 @@
   // Notice links must stay on this site; never accept script or external URLs.
   const noticeUrl = () => {
     const value = config?.privacyNoticeUrl;
-    if (typeof value !== "string" || !/^\/(?!\/)/.test(value) || /[\\\s]/.test(value)) return "";
-    return safe(() => {
-      const u = new URL(value, location.href);
-      return u.origin === new URL(location.href).origin ? u.href : "";
-    }) || "";
+    if (
+      typeof value !== "string" ||
+      !/^\/(?!\/)/.test(value) ||
+      /[\\\s]/.test(value)
+    )
+      return "";
+    return (
+      safe(() => {
+        const u = new URL(value, location.href);
+        return u.origin === new URL(location.href).origin ? u.href : "";
+      }) || ""
+    );
   };
   const utms = () => {
     const result = {};
@@ -260,7 +267,10 @@
   }
   function persistConsent() {
     try {
-      localStorage.setItem(consentKey, JSON.stringify({ ...consent, time: Date.now() }));
+      localStorage.setItem(
+        consentKey,
+        JSON.stringify({ ...consent, time: Date.now() }),
+      );
     } catch {
       // A quota failure must not leave an older grant to restart after withdrawal.
       safe(() => localStorage.removeItem(consentKey));
@@ -412,7 +422,24 @@
     safe(() => applyConsent(e.detail)),
   );
   window.addEventListener("storage", (e) => {
-    if (e.key === consentKey) location.reload();
+    if (
+      e.storageArea !== safe(() => localStorage) ||
+      (e.key !== consentKey && e.key !== null)
+    )
+      return;
+    // clear() uses a null key. Revoke this tab immediately, then read the
+    // other tab's choice on reload without overwriting it or recreating a grant.
+    consent = { analytics: false, marketing: false };
+    safe(() =>
+      window.gtag?.("consent", "update", {
+        analytics_storage: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+      }),
+    );
+    safe(() => window.fbq?.("consent", "revoke"));
+    location.reload();
   });
   fetch(new URL("analytics-config.json", base), {
     credentials: "same-origin",
@@ -455,7 +482,8 @@
         };
       if (privacySignal()) consent = { analytics: false, marketing: false };
       initialize();
-      if (!validSaved && config.enabled === true && !privacySignal()) preferences();
+      if (!validSaved && config.enabled === true && !privacySignal())
+        preferences();
       const notice = document.createElement("a");
       notice.href = noticeUrl();
       notice.textContent = "Privacy notice";

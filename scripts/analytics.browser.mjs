@@ -216,6 +216,77 @@ async function fixture(
 }
 
 try {
+  // Real cross-tab storage events; all providers remain intercepted fixtures.
+  {
+    const a = await fixture(siteKey, true);
+    try {
+      await a.page.goto(a.url + "/", { waitUntil: "load" });
+      await a.page
+        .getByRole("button", {
+          name: "Allow analytics and marketing",
+          exact: true,
+        })
+        .click();
+      await a.page.waitForFunction(() => Boolean(window.gtag && window.fbq));
+      const other = await a.context.newPage();
+      await other.goto(a.url + "/", { waitUntil: "load" });
+      await other.waitForFunction(() => Boolean(window.gtag && window.fbq));
+      await a.page.evaluate(() => {
+        window.__consentStorageEvent = false;
+        addEventListener("storage", (event) => {
+          if (event.key !== null || event.storageArea !== localStorage) return;
+          window.__consentStorageEvent = true;
+          window.KHGAnalytics.track("ticket_button_click", {
+            button_name: "after_storage_clear",
+          });
+        });
+      });
+      await Promise.all([
+        a.page.waitForEvent("load"),
+        other.evaluate(() => localStorage.clear()),
+      ]);
+      await a.page.locator("#khg-consent").waitFor();
+      assert.equal(
+        await a.page.evaluate(() =>
+          localStorage.getItem("khg-tracking-consent-v1"),
+        ),
+        null,
+      );
+      assert.ok(
+        a.events.some(
+          (e) =>
+            e.provider === "ga4" &&
+            e.args[0] === "consent" &&
+            e.args[1] === "update" &&
+            e.args[2]?.analytics_storage === "denied",
+        ),
+      );
+      assert.ok(
+        a.events.some(
+          (e) =>
+            e.provider === "meta" &&
+            e.args[0] === "consent" &&
+            e.args[1] === "revoke",
+        ),
+      );
+      assert.ok(
+        !a.events.some(
+          (e) =>
+            e.args[0] === "event" &&
+            e.args[2]?.button_name === "after_storage_clear",
+        ),
+      );
+      assert.deepEqual(a.errors, []);
+      results.push({
+        site: siteKey,
+        mode: "cross-tab-local-storage-clear",
+        result: "PASS",
+        real_storage_event: true,
+      });
+    } finally {
+      await a.context.close();
+    }
+  }
   for (const [site, info] of Object.entries(sites)) {
     for (const [label, viewport] of Object.entries({
       desktop: { width: 1440, height: 1000 },
@@ -236,8 +307,21 @@ try {
         assert.equal(a.requests.length, 0, "disabled config vendor requests");
         assert.equal(await a.page.locator("#khg-consent").count(), 0);
         if (route.includes("/privacy/")) {
-          assert.equal(await a.page.locator("main").count(),1,"One main landmark on draft notice");
-          assert.equal(await a.page.evaluate(()=>{const ids=[...document.querySelectorAll("[id]")].map(el=>el.id);return new Set(ids).size===ids.length;}),true,"Unique notice IDs");
+          assert.equal(
+            await a.page.locator("main").count(),
+            1,
+            "One main landmark on draft notice",
+          );
+          assert.equal(
+            await a.page.evaluate(() => {
+              const ids = [...document.querySelectorAll("[id]")].map(
+                (el) => el.id,
+              );
+              return new Set(ids).size === ids.length;
+            }),
+            true,
+            "Unique notice IDs",
+          );
           assert.equal(
             await a.page.evaluate(
               () => document.documentElement.scrollWidth > innerWidth + 2,

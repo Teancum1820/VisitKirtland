@@ -1,0 +1,26 @@
+name: Analytics review (no deployment)
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  review:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    env:
+      WRANGLER_SEND_METRICS: "false"
+      CLOUDFLARE_API_TOKEN: synthetic-no-production-access
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Consent, provider input, and release-config tests
+        run: node --test scripts/analytics.runtime.cjs
+      - name: Synchronize selective tracking assets and draft notice
+        shell: pwsh
+        run: ./tools/add-tracking.ps1
+      - name: Verify checked-in site matches canonical sources
+        run: git diff --exit-code

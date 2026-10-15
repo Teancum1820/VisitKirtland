@@ -5,7 +5,7 @@
     "www.visitkirtland.com"
   ],
   "allowLocalTesting": false,
-  "privacyNoticeUrl": "",
+  "privacyNoticeUrl": "/privacy/",
   "ga4MeasurementId": "G-1WEVH2BDTJ",
   "metaPixelId": "",
   "metricoolHash": "46026cbfb05c35eaff5c4900bcd965bb",
@@ -18,5 +18,6 @@
       "link_type": "registration_navigation"
     }
   },
-  "metricoolBrandId": 7369612
+  "metricoolBrandId": 7369612,
+  "metricoolVerificationStatus": "UNVERIFIED"
 }

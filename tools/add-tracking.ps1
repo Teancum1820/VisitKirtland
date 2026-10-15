@@ -1,6 +1,9 @@
 $ErrorActionPreference = 'Stop'
 $sitePath = Join-Path $PSScriptRoot '..\site'
 $utf8 = New-Object Text.UTF8Encoding($false)
+$privacyPath = Join-Path $sitePath 'privacy'
+New-Item -ItemType Directory -Path $privacyPath -Force | Out-Null
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot '..\content\privacy.html') -Destination (Join-Path $privacyPath 'index.html') -Force
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot '..\tracking') -Destination $sitePath -Recurse -Force
 Get-ChildItem -LiteralPath $sitePath -Recurse -File -Filter '*.html' | ForEach-Object {
     $html = [IO.File]::ReadAllText($_.FullName)
